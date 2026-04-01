@@ -342,6 +342,97 @@
     }
 
     /* ===== HEADER ===== */
+    /* ===== PROMO BANNER ===== */
+    .promo-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1001;
+      background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transform: translateY(-100%);
+      transition: transform 0.5s var(--ease-out);
+    }
+    .promo-banner.visible {
+      transform: translateY(0);
+    }
+    .promo-banner.hidden {
+      transform: translateY(-100%);
+    }
+    .promo-banner-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .promo-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      opacity: 0;
+      transition: opacity 0.6s var(--ease-out);
+      padding: 0 48px;
+      text-align: center;
+    }
+    .promo-text.active {
+      opacity: 1;
+    }
+    .promo-text .promo-icon {
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .promo-text .promo-label {
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      margin-right: 4px;
+    }
+    .promo-text.destaque .promo-label {
+      background: var(--gold);
+      color: var(--wine-deep);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.6rem;
+    }
+    .promo-close {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(245, 237, 228, 0.5);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s;
+      z-index: 2;
+    }
+    .promo-close:hover {
+      color: var(--cream);
+    }
+    .promo-close svg {
+      width: 14px; height: 14px;
+      stroke: currentColor; stroke-width: 2; fill: none;
+    }
+
     .header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -884,6 +975,292 @@
       background: rgba(255,255,255,0.1);
     }
 
+    /* ===== CARDÁPIO ===== */
+    .menu {
+      padding: 120px 0;
+      background: var(--dark);
+      position: relative;
+    }
+    .menu::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 70%, rgba(107, 29, 42, 0.1), transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(201, 168, 76, 0.05), transparent 50%);
+    }
+    .menu-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 72px;
+      position: relative;
+      z-index: 2;
+    }
+    .menu-header .section-label { justify-content: center; }
+    .menu-header .section-label::before { display: none; }
+    .menu-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-body);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .menu-categories {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 2;
+    }
+    .menu-tab {
+      padding: 10px 28px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: rgba(42, 31, 26, 0.5);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out);
+    }
+    .menu-tab:hover {
+      color: var(--cream);
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+    .menu-tab.active {
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--gold);
+      border-color: rgba(201, 168, 76, 0.35);
+    }
+    .menu-panel {
+      display: none;
+      position: relative;
+      z-index: 2;
+    }
+    .menu-panel.active {
+      display: block;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .menu-item {
+      background: rgba(42, 31, 26, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      transition: all 0.4s var(--ease-out);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: hidden;
+    }
+    .menu-item:hover {
+      background: rgba(58, 46, 40, 0.8);
+      border-color: rgba(201, 168, 76, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .menu-item-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(201, 168, 76, 0.05);
+    }
+    .menu-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .menu-item:hover .menu-item-img img {
+      transform: scale(1.06);
+    }
+    /* Placeholder when image is missing */
+    .menu-item-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background:
+        linear-gradient(135deg, rgba(201, 168, 76, 0.06) 0%, rgba(107, 29, 42, 0.08) 100%);
+    }
+    .menu-item-img-placeholder svg {
+      width: 36px; height: 36px;
+      stroke: var(--text-muted);
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.4;
+    }
+    .menu-item-img-placeholder span {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      opacity: 0.4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .menu-item-body {
+      padding: 24px 28px 28px;
+    }
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      gap: 16px;
+    }
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+    .menu-item-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--gold);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .menu-item-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .menu-note {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      font-style: italic;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== EVENTOS ===== */
+    .events {
+      padding: 120px 0;
+      background: var(--cream);
+      position: relative;
+    }
+    .events-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 72px;
+    }
+    .events-header .section-label { justify-content: center; color: var(--wine); }
+    .events-header .section-label::before { display: none; }
+    .events .section-title { color: var(--text-dark); }
+    .events .section-title em { color: var(--wine); }
+    .events-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-dark-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .event-card {
+      padding: 44px 32px;
+      background: var(--offwhite);
+      border: 1px solid rgba(107, 29, 42, 0.08);
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.5s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--wine), var(--terracotta));
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(107, 29, 42, 0.1);
+      border-color: rgba(107, 29, 42, 0.15);
+    }
+    .event-card:hover::before { opacity: 1; }
+    .event-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--wine);
+      background: rgba(107, 29, 42, 0.08);
+      border-radius: 14px;
+    }
+    .event-icon svg {
+      width: 28px; height: 28px;
+      stroke: var(--wine);
+      stroke-width: 1.2;
+      fill: none;
+    }
+    .event-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .event-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-dark-secondary);
+      font-weight: 300;
+    }
+    .events-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+    .btn-wine {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      background: var(--wine);
+      color: var(--cream);
+      transition: all 0.4s var(--ease-out);
+      border: 1px solid var(--wine);
+    }
+    .btn-wine:hover {
+      background: var(--wine-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(107, 29, 42, 0.3);
+    }
+    .btn-wine svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; stroke-width: 2; fill: none;
+    }
+
     /* ===== HOURS ===== */
     .hours {
       padding: 80px 0;
@@ -1424,6 +1801,8 @@
 
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .menu-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+      .events-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
 
@@ -1446,6 +1825,7 @@
       .hero-actions .btn { width: 100%; justify-content: center; }
 
       .features-grid { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
 
       .gallery-grid {
         grid-template-columns: 1fr;
@@ -1470,7 +1850,7 @@
 
       .header { padding: 0 20px; }
 
-      .about, .features, .gallery, .testimonials, .contact {
+      .about, .features, .gallery, .testimonials, .contact, .menu, .events {
         padding: 80px 0;
       }
       .experience { padding: 100px 0; }
@@ -1484,6 +1864,16 @@
 </head>
 <body>
 
+  <!-- ===== PROMO BANNER ===== -->
+  <div class="promo-banner" id="promoBanner">
+    <div class="promo-banner-content" id="promoContent">
+      <!-- Promoções carregadas via JS -->
+    </div>
+    <button class="promo-close" id="promoClose" aria-label="Fechar promoção">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
   <!-- ===== PRELOADER ===== -->
   <div class="preloader" id="preloader">
     <div class="preloader-logo">Marieta <span>Bistrô</span></div>
@@ -1495,9 +1885,9 @@
     <a href="#" class="header-logo">Marieta <span>Bistrô</span></a>
     <nav class="header-nav" id="nav">
       <a href="#sobre" data-section="sobre">Sobre</a>
-      <a href="#diferenciais" data-section="diferenciais">Diferenciais</a>
+      <a href="#cardapio" data-section="cardapio">Cardápio</a>
+      <a href="#eventos" data-section="eventos">Eventos</a>
       <a href="#galeria" data-section="galeria">Galeria</a>
-      <a href="#depoimentos" data-section="depoimentos">Depoimentos</a>
       <a href="#contato" data-section="contato">Contato</a>
       <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4." class="header-cta" target="_blank" rel="noopener">Reservar</a>
     </nav>
@@ -1670,6 +2060,254 @@
     </div>
   </section>
 
+  <!-- ===== CARDÁPIO ===== -->
+  <section class="menu grain" id="cardapio">
+    <div class="container">
+      <div class="menu-header">
+        <div class="section-label reveal">Cardápio</div>
+        <h2 class="section-title reveal reveal-delay-1">Sabores que <em>encantam</em></h2>
+        <p class="menu-subtitle reveal reveal-delay-2">Gastronomia autoral assinada pelo Chef Ricardo Vagner, com ingredientes selecionados e técnicas que valorizam a culinária brasileira contemporânea.</p>
+      </div>
+
+      <div class="menu-categories reveal">
+        <button class="menu-tab active" onclick="showMenuPanel('entradas')">Entradas</button>
+        <button class="menu-tab" onclick="showMenuPanel('principais')">Principais</button>
+        <button class="menu-tab" onclick="showMenuPanel('sobremesas')">Sobremesas</button>
+        <button class="menu-tab" onclick="showMenuPanel('drinks')">Drinks</button>
+      </div>
+
+      <div class="menu-panel active" id="panel-entradas">
+        <div class="menu-grid">
+          <div class="menu-item reveal">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/entradas/bruschetta.jpg" alt="Bruschetta do Marieta"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Bruschetta do Marieta</span>
+                <span class="menu-item-price">R$ 38</span>
+              </div>
+              <p class="menu-item-desc">Pão artesanal com tomates confitados, burrata fresca e redução de balsâmico</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-1">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/entradas/carpaccio.jpg" alt="Carpaccio de Wagyu"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Carpaccio de Wagyu</span>
+                <span class="menu-item-price">R$ 62</span>
+              </div>
+              <p class="menu-item-desc">Lâminas de wagyu com rúcula selvagem, lascas de parmesão e azeite trufado</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-2">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/entradas/camaroes.jpg" alt="Camarões Flambados"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Camarões Flambados</span>
+                <span class="menu-item-price">R$ 56</span>
+              </div>
+              <p class="menu-item-desc">Camarões rosa flambados ao conhaque com manteiga de ervas e crostini</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-3">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/entradas/tartar.jpg" alt="Tartar de Atum"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tartar de Atum</span>
+                <span class="menu-item-price">R$ 52</span>
+              </div>
+              <p class="menu-item-desc">Atum fresco com abacate, gergelim negro, gengibre e molho ponzu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="panel-principais">
+        <div class="menu-grid">
+          <div class="menu-item reveal">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/principais/file.jpg" alt="Filé ao Molho de Vinho"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Filé ao Molho de Vinho</span>
+                <span class="menu-item-price">R$ 98</span>
+              </div>
+              <p class="menu-item-desc">Filé mignon grelhado com redução de vinho tinto, risoto de funghi e aspargos</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-1">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/principais/risoto.jpg" alt="Risoto de Camarão"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Risoto de Camarão</span>
+                <span class="menu-item-price">R$ 89</span>
+              </div>
+              <p class="menu-item-desc">Arroz arbóreo cremoso com camarões salteados, açafrão e finalizado com mascarpone</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-2">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/principais/cordeiro.jpg" alt="Cordeiro Assado"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Cordeiro Assado</span>
+                <span class="menu-item-price">R$ 112</span>
+              </div>
+              <p class="menu-item-desc">Carré de cordeiro com crosta de ervas, purê de batata trufado e jus de assado</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-3">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/principais/peixe.jpg" alt="Peixe do Dia"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Peixe do Dia</span>
+                <span class="menu-item-price">R$ 85</span>
+              </div>
+              <p class="menu-item-desc">Peixe fresco grelhado com legumes da estação, molho beurre blanc e farofa crocante</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="panel-sobremesas">
+        <div class="menu-grid">
+          <div class="menu-item reveal">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/sobremesas/petit-gateau.jpg" alt="Petit Gâteau"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Petit Gâteau</span>
+                <span class="menu-item-price">R$ 42</span>
+              </div>
+              <p class="menu-item-desc">Bolo quente de chocolate belga 70% com sorvete de baunilha de Madagascar</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-1">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/sobremesas/creme-brulee.jpg" alt="Crème Brûlée"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Crème Brûlée</span>
+                <span class="menu-item-price">R$ 36</span>
+              </div>
+              <p class="menu-item-desc">Creme de baunilha com casquinha caramelizada e frutas vermelhas frescas</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-2">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/sobremesas/cheesecake.jpg" alt="Cheesecake de Frutas"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Cheesecake de Frutas</span>
+                <span class="menu-item-price">R$ 38</span>
+              </div>
+              <p class="menu-item-desc">Cheesecake artesanal com coulis de frutas vermelhas e crumble de amêndoas</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-3">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/sobremesas/tiramisu.jpg" alt="Tiramisù"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Tiramisù</span>
+                <span class="menu-item-price">R$ 40</span>
+              </div>
+              <p class="menu-item-desc">Receita clássica italiana com café espresso, mascarpone e cacau em pó</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="panel-drinks">
+        <div class="menu-grid">
+          <div class="menu-item reveal">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/drinks/negroni.jpg" alt="Negroni do Marieta"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Negroni do Marieta</span>
+                <span class="menu-item-price">R$ 38</span>
+              </div>
+              <p class="menu-item-desc">Gin premium, Campari, vermute rosso e twist de laranja defumada</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-1">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/drinks/aperol.jpg" alt="Aperol Spritz"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Aperol Spritz</span>
+                <span class="menu-item-price">R$ 34</span>
+              </div>
+              <p class="menu-item-desc">Aperol, prosecco, água com gás e fatia de laranja fresca</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-2">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/drinks/old-fashioned.jpg" alt="Old Fashioned"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Old Fashioned</span>
+                <span class="menu-item-price">R$ 42</span>
+              </div>
+              <p class="menu-item-desc">Bourbon premium, angostura, açúcar demerara e casca de laranja flamejada</p>
+            </div>
+          </div>
+          <div class="menu-item reveal reveal-delay-3">
+            <div class="menu-item-img">
+              <!-- Substituir pelo <img src="imagens/drinks/gin-tonica.jpg" alt="Gin Tônica Especial"> -->
+              <div class="menu-item-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Foto em breve</span></div>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-header">
+                <span class="menu-item-name">Gin Tônica Especial</span>
+                <span class="menu-item-price">R$ 36</span>
+              </div>
+              <p class="menu-item-desc">Gin artesanal, tônica premium com botânicos, pepino e cardamomo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="menu-note reveal">* Cardápio sujeito a alterações conforme disponibilidade de ingredientes sazonais</p>
+    </div>
+  </section>
+
   <!-- ===== HORÁRIOS ===== -->
   <section class="hours grain">
     <div class="container">
@@ -1765,6 +2403,46 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EVENTOS ===== -->
+  <section class="events" id="eventos">
+    <div class="container">
+      <div class="events-header">
+        <div class="section-label reveal">Eventos</div>
+        <h2 class="section-title reveal reveal-delay-1">Celebre no <em>Marieta</em></h2>
+        <p class="events-subtitle reveal reveal-delay-2">Transformamos momentos especiais em experiências gastronômicas inesquecíveis. Nosso espaço e equipe estão prontos para tornar seu evento único.</p>
+      </div>
+      <div class="events-grid">
+        <div class="event-card reveal">
+          <div class="event-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3 class="event-title">Jantares Corporativos</h3>
+          <p class="event-desc">Ambiente sofisticado para confraternizações, reuniões de negócios e eventos empresariais com menu exclusivo.</p>
+        </div>
+        <div class="event-card reveal reveal-delay-1">
+          <div class="event-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="event-title">Aniversários & Comemorações</h3>
+          <p class="event-desc">Celebre datas especiais com um menu degustação personalizado e decoração que reflete a ocasião.</p>
+        </div>
+        <div class="event-card reveal reveal-delay-2">
+          <div class="event-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="event-title">Eventos Privados</h3>
+          <p class="event-desc">Espaço reservado para grupos de até 60 pessoas, com atendimento exclusivo e cardápio sob medida.</p>
+        </div>
+      </div>
+      <div class="events-cta reveal">
+        <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20eventos%20no%20Marieta%20Bistr%C3%B4." class="btn-wine" target="_blank" rel="noopener">
+          Solicitar Orçamento
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -2073,6 +2751,18 @@
     }
 
     // ---- Lightbox ----
+    function showMenuPanel(panel) {
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('panel-' + panel).classList.add('active');
+      event.currentTarget.classList.add('active');
+      // Re-trigger reveal animations for newly visible items
+      document.querySelectorAll('#panel-' + panel + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 50);
+      });
+    }
+
     function openLightbox(item) {
       const img = item.querySelector('img');
       const lightbox = document.getElementById('lightbox');
@@ -2089,6 +2779,65 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // ===== PROMOÇÕES DO DIA =====
+    // Para editar as promoções, altere o objeto abaixo.
+    // Cada dia da semana pode ter múltiplas promoções (array).
+    // Array vazio [] = sem promoção = banner não aparece.
+    // "destaque: true" dá ênfase extra ao texto.
+    (function() {
+      var promocoes = {
+        "domingo":  [],
+        "segunda":  [],
+        "terca":    [{ "texto": "Prato em Dobro — peça um prato principal e ganhe outro!" }],
+        "quarta":   [{ "texto": "Rodízio de Risoto", "destaque": true }],
+        "quinta":   [{ "texto": "Happy Hour — drinks com 20% de desconto até 21h" }],
+        "sexta":    [{ "texto": "Menu Degustação Especial do Chef" }, { "texto": "DJ ao vivo a partir das 21h" }],
+        "sabado":   [{ "texto": "Noite Especial — menu exclusivo com harmonização de vinhos", "destaque": true }]
+      };
+
+      var dias = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+      var hoje = dias[new Date().getDay()];
+      var banner = document.getElementById('promoBanner');
+      var content = document.getElementById('promoContent');
+      var closeBtn = document.getElementById('promoClose');
+      var header = document.getElementById('header');
+
+      if (sessionStorage.getItem('promoClosed')) return;
+
+      var promos = promocoes[hoje];
+      if (!promos || promos.length === 0) return;
+
+      promos.forEach(function(promo, i) {
+        var div = document.createElement('div');
+        div.className = 'promo-text' + (i === 0 ? ' active' : '') + (promo.destaque ? ' destaque' : '');
+        div.innerHTML =
+          '<span class="promo-icon">&#9733;</span>' +
+          '<span class="promo-label">Hoje</span> ' +
+          '<span>' + promo.texto + '</span>';
+        content.appendChild(div);
+      });
+
+      banner.classList.add('visible');
+      header.style.top = '40px';
+
+      if (promos.length > 1) {
+        var current = 0;
+        setInterval(function() {
+          var texts = content.querySelectorAll('.promo-text');
+          texts[current].classList.remove('active');
+          current = (current + 1) % texts.length;
+          texts[current].classList.add('active');
+        }, 4000);
+      }
+
+      closeBtn.addEventListener('click', function() {
+        banner.classList.remove('visible');
+        banner.classList.add('hidden');
+        header.style.top = '0';
+        sessionStorage.setItem('promoClosed', '1');
+      });
+    })();
   </script>
 </body>
 </html>

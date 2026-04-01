@@ -1,0 +1,20 @@
+{
+  "domingo": [],
+  "segunda": [],
+  "terca": [
+    { "texto": "Prato em Dobro — peça um prato principal e ganhe outro!" }
+  ],
+  "quarta": [
+    { "texto": "Rodízio de Risoto", "destaque": true }
+  ],
+  "quinta": [
+    { "texto": "Happy Hour — drinks com 20% de desconto até 21h" }
+  ],
+  "sexta": [
+    { "texto": "Menu Degustação Especial do Chef" },
+    { "texto": "DJ ao vivo a partir das 21h" }
+  ],
+  "sabado": [
+    { "texto": "Noite Especial — menu exclusivo com harmonização de vinhos", "destaque": true }
+  ]
+}
