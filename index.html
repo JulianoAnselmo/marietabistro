@@ -1055,16 +1055,16 @@
       z-index: 2;
     }
     .menu-tab {
-      padding: 10px 28px;
+      padding: 10px 20px;
       font-family: var(--font-body);
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
-      background: rgba(42, 31, 26, 0.5);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.4s var(--ease-out);
     }
@@ -1073,9 +1073,9 @@
       border-color: rgba(201, 168, 76, 0.25);
     }
     .menu-tab.active {
-      background: rgba(201, 168, 76, 0.12);
-      color: var(--gold);
-      border-color: rgba(201, 168, 76, 0.35);
+      background: rgba(107, 29, 42, 0.8);
+      color: var(--cream);
+      border-color: rgba(201, 168, 76, 0.2);
     }
     .menu-panel {
       display: none;
@@ -1246,6 +1246,16 @@
       font-style: italic;
       margin-top: 12px;
       font-weight: 300;
+    }
+    .menu-list-item-badge {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.65rem;
+      background: rgba(201, 168, 76, 0.1);
+      color: var(--gold);
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.05em;
     }
     /* Scrollable tabs on mobile */
     .menu-categories {
@@ -2687,10 +2697,22 @@
       var tabsContainer = document.getElementById('menuTabs');
       var panelsContainer = document.getElementById('menuPanels');
 
+      var emojiMap = {
+        'entradas': '🍽',
+        'massas': '🍝',
+        'carnes': '🥩',
+        'peixes': '🐟',
+        'risotos': '🍚',
+        'sobremesas': '🍰',
+        'drinks': '🍸',
+        'bebidas': '🍷'
+      };
+
       cardapioData.forEach(function(tab, tabIndex) {
         var btn = document.createElement('button');
         btn.className = 'menu-tab' + (tabIndex === 0 ? ' active' : '');
-        btn.textContent = tab.label;
+        var emoji = emojiMap[tab.id] || '';
+        btn.textContent = (emoji ? emoji + ' ' : '') + tab.label;
         btn.addEventListener('click', function() {
           document.querySelectorAll('.menu-panel').forEach(function(p) { p.classList.remove('active'); });
           document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -2749,6 +2771,13 @@
               desc.className = 'menu-list-item-desc';
               desc.textContent = item.desc;
               itemDiv.appendChild(desc);
+            }
+
+            if (item.destaque) {
+              var badge = document.createElement('span');
+              badge.className = 'menu-list-item-badge';
+              badge.textContent = '✨ Favorito do Chef';
+              itemDiv.appendChild(badge);
             }
 
             catDiv.appendChild(itemDiv);
