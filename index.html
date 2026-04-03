@@ -2550,26 +2550,50 @@
       });
     });
 
-    // ===== URLs dos Gists (raw) =====
-    // Após criar os Gists, cole as URLs raw aqui.
-    // Para pegar a URL raw: abra o Gist > clique "Raw" > copie a URL SEM o hash do commit.
-    // Exemplo: https://gist.githubusercontent.com/SEU_USER/ID_DO_GIST/raw/cardapio.json
-    var GIST_CARDAPIO = 'https://gist.githubusercontent.com/JulianoAnselmo/645ac80810238dd01e86f2fb8a3424cd/raw/marieta-cardapio.json';
-    var GIST_PROMOCOES = 'https://gist.githubusercontent.com/JulianoAnselmo/8415fe6e1fd08f69f76cf2db78959fe9/raw/marieta-promocoes.json';
-
-    // ===== CARDÁPIO =====
-    // Tenta carregar do Gist; se falhar ou em file://, usa o arquivo local (cardapio.js)
+    // ===== FIRESTORE CONFIG =====
+    // Slug do restaurante no Firestore (deve coincidir com o cadastrado no admin)
+    var RESTAURANT_SLUG = 'marieta-bistro';
+    var FIRESTORE_PROJECT = 'clientes-admin-a2258';
+    var FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/' + FIRESTORE_PROJECT + '/databases/(default)/documents/restaurants/' + RESTAURANT_SLUG + '/data/';
     var isLocal = location.protocol === 'file:';
 
+    // Extrai o valor de um campo Firestore (converte o formato da API REST)
+    function parseFirestoreValue(val) {
+      if (val.stringValue !== undefined) return val.stringValue;
+      if (val.booleanValue !== undefined) return val.booleanValue;
+      if (val.integerValue !== undefined) return Number(val.integerValue);
+      if (val.doubleValue !== undefined) return val.doubleValue;
+      if (val.nullValue !== undefined) return null;
+      if (val.arrayValue) return (val.arrayValue.values || []).map(parseFirestoreValue);
+      if (val.mapValue) {
+        var obj = {};
+        var fields = val.mapValue.fields || {};
+        for (var key in fields) obj[key] = parseFirestoreValue(fields[key]);
+        return obj;
+      }
+      return val;
+    }
+
+    function fetchFirestore(docName) {
+      return fetch(FIRESTORE_BASE + docName)
+        .then(function(r) { return r.json(); })
+        .then(function(doc) {
+          if (doc.fields && doc.fields.content) {
+            return parseFirestoreValue(doc.fields.content);
+          }
+          return null;
+        });
+    }
+
+    // ===== CARDÁPIO =====
     function iniciarCardapio(data) {
       renderCardapio(data);
       iniciarReveal();
     }
 
-    if (GIST_CARDAPIO && !isLocal) {
-      fetch(GIST_CARDAPIO + '?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(data) { iniciarCardapio(data); })
+    if (!isLocal) {
+      fetchFirestore('cardapio')
+        .then(function(data) { if (data) iniciarCardapio(data); else iniciarCardapio(cardapioData); })
         .catch(function() { iniciarCardapio(cardapioData); });
     } else {
       iniciarCardapio(cardapioData);
@@ -2756,10 +2780,9 @@
       });
     }
 
-    if (GIST_PROMOCOES && !isLocal) {
-      fetch(GIST_PROMOCOES + '?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(data) { renderPromocoes(data); })
+    if (!isLocal) {
+      fetchFirestore('promocoes')
+        .then(function(data) { if (data) renderPromocoes(data); else renderPromocoes(promocoesData); })
         .catch(function() { renderPromocoes(promocoesData); });
     } else {
       renderPromocoes(promocoesData);
