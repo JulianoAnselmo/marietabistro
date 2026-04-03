@@ -14,7 +14,28 @@
       "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\);const g=JSON.parse\\(d\\);Object.keys\\(g.files\\).forEach\\(f=>console.log\\(f,''''=>'''',g.files[f].raw_url.replace\\(/\\\\/raw\\\\/[a-f0-9]+\\\\//,''''/raw/''''\\)\\)\\)\")",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Read(//c/Users/julia/Downloads/**)",
+      "Bash(npm create:*)",
+      "Bash(npm -v)",
+      "Bash(nvm list:*)",
+      "Bash(nvm ls:*)",
+      "Read(//c/Users/julia/Downloads/marieta/$NVM_HOME/**)",
+      "Bash(\"$NVM_HOME/nvm.exe\" list:*)",
+      "Read(//c/Users/julia/AppData/Roaming/nvm//**)",
+      "Read(//c/Program Files/nodejs//**)",
+      "Bash(where nvm:*)",
+      "Read(//c/ProgramData/**)",
+      "Bash(/c/Users/julia/AppData/Roaming/nvm/nvm.exe use:*)",
+      "Bash(npm install:*)",
+      "Bash(npx vite:*)",
+      "Bash(git init:*)",
+      "Bash(gh repo:*)",
+      "Bash(git remote:*)",
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "Bash(git rebase:*)",
+      "Bash(node scripts/seed-admin.mjs)"
     ]
   }
 }
