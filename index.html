@@ -1945,9 +1945,10 @@
       .about-timeline { padding-left: 40px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .menu-list { max-width: 100%; }
-      .menu-scroll-wrapper { flex-direction: column; }
+      .menu-scroll-wrapper { flex-direction: column; max-width: 100%; }
       .menu-categories {
         flex-direction: row;
+        flex-wrap: nowrap;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -1955,14 +1956,15 @@
         border-bottom: 1px solid rgba(255,255,255,0.06);
         margin-right: 0;
         padding-right: 0;
+        padding: 0 0 12px;
         margin-bottom: 24px;
-        padding-bottom: 12px;
         min-width: auto;
         position: relative;
         top: auto;
+        align-self: auto;
       }
       .menu-categories::-webkit-scrollbar { display: none; }
-      .menu-panels-container { max-height: none; overflow-y: visible; }
+      .menu-panels-container { max-height: none; overflow-y: visible; flex: auto; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-carousel { max-width: 100%; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1988,7 +1990,7 @@
       .about-timeline { padding-left: 32px; }
       .timeline-image img { width: 180px; height: 120px; }
 
-      .menu-scroll-wrapper { flex-direction: column; }
+      .menu-scroll-wrapper { flex-direction: column; max-width: 100%; }
       .menu-categories {
         flex-direction: row;
         flex-wrap: nowrap;
@@ -1999,16 +2001,17 @@
         border-bottom: 1px solid rgba(255,255,255,0.06);
         margin-right: 0;
         padding-right: 0;
+        padding: 0 0 10px;
         margin-bottom: 16px;
-        padding-bottom: 10px;
         min-width: auto;
         position: relative;
         top: auto;
+        align-self: auto;
         gap: 4px;
       }
       .menu-categories::-webkit-scrollbar { display: none; }
       .menu-tab { padding: 8px 14px; font-size: 0.65rem; white-space: nowrap; }
-      .menu-panels-container { max-height: none; overflow-y: visible; }
+      .menu-panels-container { max-height: none; overflow-y: visible; flex: auto; }
       .menu-list-item-name { font-size: 1.1rem; }
 
       .features-grid { grid-template-columns: 1fr; }
