@@ -2567,7 +2567,7 @@
     }
 
     if (GIST_CARDAPIO && !isLocal) {
-      fetch(GIST_CARDAPIO)
+      fetch(GIST_CARDAPIO + '?t=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(data) { iniciarCardapio(data); })
         .catch(function() { iniciarCardapio(cardapioData); });
@@ -2757,7 +2757,7 @@
     }
 
     if (GIST_PROMOCOES && !isLocal) {
-      fetch(GIST_PROMOCOES)
+      fetch(GIST_PROMOCOES + '?t=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(data) { renderPromocoes(data); })
         .catch(function() { renderPromocoes(promocoesData); });
