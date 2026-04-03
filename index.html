@@ -342,95 +342,19 @@
     }
 
     /* ===== HEADER ===== */
-    /* ===== PROMO BANNER ===== */
-    .promo-banner {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1001;
-      background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      transform: translateY(-100%);
-      transition: transform 0.5s var(--ease-out);
-    }
-    .promo-banner.visible {
-      transform: translateY(0);
-    }
-    .promo-banner.hidden {
-      transform: translateY(-100%);
-    }
-    .promo-banner-content {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .promo-text {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+    /* ===== PROMO IN HERO ===== */
+    .promo-hero-text {
       font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--cream);
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 300;
       opacity: 0;
-      transition: opacity 0.6s var(--ease-out);
-      padding: 0 48px;
-      text-align: center;
-    }
-    .promo-text.active {
-      opacity: 1;
-    }
-    .promo-text .promo-icon {
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-    .promo-text .promo-label {
-      color: var(--gold);
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      margin-right: 4px;
-    }
-    .promo-text.destaque .promo-label {
-      background: var(--gold);
-      color: var(--wine-deep);
-      padding: 2px 8px;
-      border-radius: 3px;
-      font-size: 0.6rem;
-    }
-    .promo-close {
+      transition: opacity 0.5s var(--ease-out);
       position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: rgba(245, 237, 228, 0.5);
-      cursor: pointer;
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.3s;
-      z-index: 2;
     }
-    .promo-close:hover {
-      color: var(--cream);
-    }
-    .promo-close svg {
-      width: 14px; height: 14px;
-      stroke: currentColor; stroke-width: 2; fill: none;
+    .promo-hero-text.active {
+      opacity: 1;
+      position: relative;
     }
 
     .header {
@@ -549,35 +473,28 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-    }
-    .hero-bg img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transform: scale(1.05);
-      will-change: transform;
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
       background:
-        linear-gradient(180deg,
-          rgba(26,18,16,0.7) 0%,
-          rgba(26,18,16,0.4) 40%,
-          rgba(26,18,16,0.5) 70%,
-          rgba(26,18,16,0.92) 100%
-        ),
-        linear-gradient(90deg,
-          rgba(26,18,16,0.6) 0%,
-          transparent 50%
-        );
+        radial-gradient(ellipse at 70% 40%, rgba(107, 29, 42, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(201, 168, 76, 0.06) 0%, transparent 40%),
+        var(--dark);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 720px;
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
       padding: 0 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 1;
+      max-width: 600px;
     }
 
     .hero-location {
@@ -586,21 +503,21 @@
       gap: 8px;
       font-size: 0.65rem;
       font-weight: 400;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.7);
-      margin-bottom: 28px;
+      color: rgba(201, 168, 76, 0.6);
+      margin-bottom: 24px;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.3s forwards;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 300;
       line-height: 1.1;
       color: var(--cream);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.5s forwards;
     }
@@ -612,12 +529,12 @@
 
     .hero-subtitle {
       font-family: var(--font-body);
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 300;
       line-height: 1.7;
-      color: var(--cream-warm);
-      max-width: 520px;
-      margin-bottom: 40px;
+      color: var(--text-body);
+      max-width: 440px;
+      margin-bottom: 32px;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.7s forwards;
     }
@@ -626,38 +543,15 @@
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
+      align-items: center;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.9s forwards;
     }
 
-    .hero-social-proof {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 10px 20px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 1.1s forwards;
-    }
-    .hero-social-proof .stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-    }
-    .hero-social-proof .rating-text {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
     .hero-secondary-cta {
       font-size: 0.75rem;
-      color: rgba(201, 168, 76, 0.6);
-      letter-spacing: 0.1em;
-      margin-top: 16px;
-      opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 1s forwards;
+      color: rgba(201, 168, 76, 0.5);
+      letter-spacing: 0.05em;
     }
     .hero-secondary-cta a {
       color: var(--gold);
@@ -667,6 +561,47 @@
     }
     .hero-secondary-cta a:hover {
       border-color: var(--gold);
+    }
+
+    /* Hero right info stack */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.8s forwards;
+    }
+    .hero-info-block {
+      text-align: right;
+    }
+    .hero-info-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .hero-info-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+    .hero-info-value .gold {
+      color: var(--gold);
+    }
+    .hero-info-stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 2px;
+    }
+    .hero-info-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(201, 168, 76, 0.2);
+      align-self: flex-end;
     }
 
     @keyframes fadeUp {
@@ -795,8 +730,9 @@
     }
     .timeline-image img {
       width: 220px;
-      height: 150px;
+      height: 180px;
       object-fit: cover;
+      object-position: top center;
       display: block;
       transition: transform 0.6s var(--ease-out);
     }
@@ -1058,50 +994,86 @@
     .menu-header {
       text-align: center;
       max-width: 600px;
-      margin: 0 auto 72px;
+      margin: 0 auto 48px;
       position: relative;
       z-index: 2;
     }
     .menu-header .section-label { justify-content: center; }
     .menu-header .section-label::before { display: none; }
+    .menu-header .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    }
     .menu-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-body);
+      font-size: 0.88rem;
+      color: var(--text-muted);
       font-weight: 300;
       line-height: 1.7;
-      margin-top: 8px;
+      margin-top: 12px;
+    }
+    .menu-scroll-wrapper {
+      display: flex;
+      gap: 0;
+      position: relative;
+      z-index: 2;
+      max-width: 1060px;
+      margin: 0 auto;
     }
     .menu-categories {
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 56px;
-      position: relative;
-      z-index: 2;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 160px;
+      padding: 8px 0;
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      margin-right: 40px;
+      padding-right: 24px;
     }
     .menu-tab {
-      padding: 10px 20px;
+      padding: 10px 16px;
       font-family: var(--font-body);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
       color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: transparent;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.4s var(--ease-out);
+      transition: all 0.3s var(--ease-out);
+      text-align: left;
+      white-space: nowrap;
     }
     .menu-tab:hover {
       color: var(--cream);
-      border-color: rgba(201, 168, 76, 0.25);
+      background: rgba(255, 255, 255, 0.03);
     }
     .menu-tab.active {
-      background: rgba(107, 29, 42, 0.8);
-      color: var(--cream);
-      border-color: rgba(201, 168, 76, 0.2);
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+      font-weight: 500;
+    }
+    .menu-panels-container {
+      flex: 1;
+      min-width: 0;
+      max-height: 75vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .menu-panels-container::-webkit-scrollbar {
+      width: 4px;
+    }
+    .menu-panels-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .menu-panels-container::-webkit-scrollbar-thumb {
+      background: rgba(201, 168, 76, 0.3);
+      border-radius: 4px;
+    }
+    .menu-panels-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(201, 168, 76, 0.5);
     }
     .menu-panel {
       display: none;
@@ -1216,55 +1188,45 @@
       margin-bottom: 0;
     }
     .menu-list-category-title {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 400;
-      font-style: italic;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+      margin-bottom: 32px;
     }
     .menu-list-item {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: background 0.3s;
+      margin-bottom: 28px;
     }
     .menu-list-item:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
     .menu-list-item-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 16px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .menu-list-item-name {
       font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 500;
+      font-size: 1.25rem;
+      font-weight: 400;
       color: var(--cream);
-    }
-    .menu-list-item-dots {
-      flex: 1;
-      border-bottom: 1px dotted rgba(255,255,255,0.1);
-      min-width: 20px;
-      margin-bottom: 5px;
     }
     .menu-list-item-price {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--gold);
       white-space: nowrap;
-      font-weight: 500;
+      font-weight: 300;
     }
     .menu-list-item-desc {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       font-weight: 300;
-      line-height: 1.55;
-      max-width: 600px;
+      line-height: 1.6;
     }
     .menu-list-note {
       font-size: 0.78rem;
@@ -1282,15 +1244,6 @@
       padding: 3px 10px;
       border-radius: 12px;
       letter-spacing: 0.05em;
-    }
-    /* Scrollable tabs on mobile */
-    .menu-categories {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .menu-categories::-webkit-scrollbar {
-      display: none;
     }
     .menu-note {
       text-align: center;
@@ -1992,6 +1945,24 @@
       .about-timeline { padding-left: 40px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .menu-list { max-width: 100%; }
+      .menu-scroll-wrapper { flex-direction: column; }
+      .menu-categories {
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        margin-right: 0;
+        padding-right: 0;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        min-width: auto;
+        position: relative;
+        top: auto;
+      }
+      .menu-categories::-webkit-scrollbar { display: none; }
+      .menu-panels-container { max-height: 65vh; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-carousel { max-width: 100%; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -2007,7 +1978,10 @@
     }
 
     @media (max-width: 640px) {
-      .hero-content { padding: 0 24px; }
+      .hero-content { padding: 0 24px; flex-direction: column; gap: 40px; }
+      .hero-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 24px; }
+      .hero-info-block { text-align: left; }
+      .hero-info-divider { display: none; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
 
@@ -2054,16 +2028,6 @@
 </head>
 <body>
 
-  <!-- ===== PROMO BANNER ===== -->
-  <div class="promo-banner" id="promoBanner">
-    <div class="promo-banner-content" id="promoContent">
-      <!-- Promoções carregadas via JS -->
-    </div>
-    <button class="promo-close" id="promoClose" aria-label="Fechar promoção">
-      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-
   <!-- ===== PRELOADER ===== -->
   <div class="preloader" id="preloader">
     <div class="preloader-logo">Marieta <span>Bistrô</span></div>
@@ -2088,27 +2052,42 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero grain" id="hero">
-    <div class="hero-bg">
-      <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Interior do Marieta Bistrô com iluminação quente e paredes de tijolos expostos" loading="eager" id="heroImg">
+    <div class="hero-bg" id="heroImg">
     </div>
     <div class="hero-content">
-      <div class="hero-location">
-        DESDE 1920 · TAQUARITINGA, SP
+      <div class="hero-left">
+        <div class="hero-location">
+          DESDE 1920 · TAQUARITINGA, SP
+        </div>
+        <h1 class="hero-title">Onde a história<br>encontra o <em>sabor</em></h1>
+        <p class="hero-subtitle">Um casarão centenário que guarda memórias de família e serve gastronomia autoral do Chef Ricardo Vagner.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Reserve sua mesa
+          </a>
+          <div class="hero-secondary-cta">
+            ou <a href="#cardapio">explore o cardápio</a>
+          </div>
+        </div>
       </div>
-      <h1 class="hero-title">Onde a história<br>encontra o <em>sabor</em></h1>
-      <p class="hero-subtitle">Um casarão centenário que guarda memórias de família e serve gastronomia autoral do Chef Ricardo Vagner.</p>
-      <div class="hero-actions">
-        <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="btn btn-primary">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          Reserve sua mesa
-        </a>
-      </div>
-      <div class="hero-secondary-cta">
-        ou <a href="#cardapio">explore o cardápio</a>
-      </div>
-      <div class="hero-social-proof">
-        <span class="stars">★★★★★</span>
-        <span class="rating-text">4.9 no Google · 128+ avaliações</span>
+      <div class="hero-right">
+        <div class="hero-info-block">
+          <div class="hero-info-label">Funcionamento</div>
+          <div class="hero-info-value">Terça a Domingo</div>
+          <div class="hero-info-value"><span class="gold">19h30 — 23h</span></div>
+        </div>
+        <div class="hero-info-divider"></div>
+        <div class="hero-info-block">
+          <div class="hero-info-label">Avaliações</div>
+          <div class="hero-info-stars">★★★★★</div>
+          <div class="hero-info-value">4.9 no Google</div>
+        </div>
+        <div class="hero-info-divider"></div>
+        <div class="hero-info-block" id="promoHeroBadge" style="display:none;">
+          <div class="hero-info-label">Promoção de hoje</div>
+          <div class="hero-info-value" id="promoContent" style="color:var(--gold);"></div>
+        </div>
       </div>
     </div>
     <div class="hero-scroll">
@@ -2140,7 +2119,7 @@
           <h3 class="timeline-title">A Vovó Marieta</h3>
           <p class="timeline-text">Dona Marieta, mulher italiana que transformava a cozinha em um lugar mágico, reunia a família ao redor da mesa com receitas que viraram tradição. O amor pela culinária passou de geração em geração.</p>
           <div class="timeline-image">
-            <img src="imagens/historia-vo-marieta.jpg" alt="Vovó Marieta — a inspiração por trás do restaurante" loading="lazy">
+            <img src="imagens/b39a57da-efbb-42db-81dd-28dc10bf5804.png" alt="Vovó Marieta — a inspiração por trás do restaurante" loading="lazy">
           </div>
         </div>
         <div class="timeline-chapter reveal">
@@ -2158,7 +2137,7 @@
           <h3 class="timeline-title">Chef Ricardo Vagner</h3>
           <p class="timeline-text">Neto primogênito da Vovó Marieta, o Chef Ricardo Vagner guardou consigo memórias que hoje moldam sua paixão pela culinária. Com técnica contemporânea e respeito pela tradição, transforma ingredientes regionais em pratos de conceito único.</p>
           <div class="timeline-image">
-            <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Chef Ricardo Vagner na cozinha do Marieta Bistrô" loading="lazy">
+            <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Chef Ricardo Vagner na cozinha do Marieta Bistrô" loading="lazy" style="object-position: top;">
           </div>
         </div>
       </div>
@@ -2247,8 +2226,12 @@
       </div>
 
       <!-- Tabs e painéis gerados via JS a partir do JSON abaixo -->
-      <div class="menu-categories reveal" id="menuTabs"></div>
-      <div id="menuPanels"></div>
+      <div class="menu-scroll-wrapper reveal">
+        <div class="menu-categories" id="menuTabs"></div>
+        <div class="menu-panels-container" id="menuPanelsWrap">
+          <div id="menuPanels"></div>
+        </div>
+      </div>
       <p class="menu-note reveal">* Cardápio sujeito a alterações conforme disponibilidade de ingredientes sazonais</p>
     </div>
   </section>
@@ -2609,6 +2592,7 @@
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
+
   <!-- ===== LIGHTBOX ===== -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" aria-label="Fechar">
@@ -2676,10 +2660,7 @@
 
     window.addEventListener('scroll', () => {
       const scrollY = window.pageYOffset;
-      // Hero parallax
-      if (heroImg && scrollY < window.innerHeight) {
-        heroImg.style.transform = 'scale(1.05) translateY(' + (scrollY * 0.15) + 'px)';
-      }
+      // Hero parallax removed (no background image)
       // Experience parallax
       if (expImg) {
         const expSection = expImg.closest('.experience');
@@ -2778,26 +2759,17 @@
       var tabsContainer = document.getElementById('menuTabs');
       var panelsContainer = document.getElementById('menuPanels');
 
-      var emojiMap = {
-        'entradas': '🍽',
-        'massas': '🍝',
-        'carnes': '🥩',
-        'peixes': '🐟',
-        'risotos': '🍚',
-        'sobremesas': '🍰',
-        'drinks': '🍸',
-        'bebidas': '🍷'
-      };
-
       cardapioData.forEach(function(tab, tabIndex) {
         var btn = document.createElement('button');
         btn.className = 'menu-tab' + (tabIndex === 0 ? ' active' : '');
-        var emoji = emojiMap[tab.id] || '';
-        btn.textContent = (emoji ? emoji + ' ' : '') + tab.label;
+        btn.textContent = tab.label;
         btn.addEventListener('click', function() {
           document.querySelectorAll('.menu-panel').forEach(function(p) { p.classList.remove('active'); });
           document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
-          document.getElementById('panel-' + tab.id).classList.add('active');
+          var activePanel = document.getElementById('panel-' + tab.id);
+          activePanel.classList.add('active');
+          var wrapper = document.getElementById('menuPanelsWrap');
+          if (wrapper) wrapper.scrollTop = 0;
           btn.classList.add('active');
           document.querySelectorAll('#panel-' + tab.id + ' .reveal').forEach(function(el) {
             el.classList.remove('visible');
@@ -2835,13 +2807,10 @@
             header.appendChild(name);
 
             if (item.preco && item.preco > 0) {
-              var dots = document.createElement('span');
-              dots.className = 'menu-list-item-dots';
-              header.appendChild(dots);
-
               var price = document.createElement('span');
               price.className = 'menu-list-item-price';
-              price.textContent = 'R$' + Number(item.preco).toFixed(2).replace('.', ',');
+              var p = Number(item.preco);
+              price.textContent = p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',');
               header.appendChild(price);
             }
 
@@ -2948,45 +2917,30 @@
     function renderPromocoes(data) {
       var dias = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
       var hoje = dias[new Date().getDay()];
-      var banner = document.getElementById('promoBanner');
+      var block = document.getElementById('promoHeroBadge');
       var content = document.getElementById('promoContent');
-      var closeBtn = document.getElementById('promoClose');
-      var header = document.getElementById('header');
-
-      if (sessionStorage.getItem('promoClosed')) return;
 
       var promos = data[hoje];
       if (!promos || promos.length === 0) return;
 
       promos.forEach(function(promo, i) {
-        var div = document.createElement('div');
-        div.className = 'promo-text' + (i === 0 ? ' active' : '') + (promo.destaque ? ' destaque' : '');
-        div.innerHTML =
-          '<span class="promo-icon">&#9733;</span>' +
-          '<span class="promo-label">Hoje</span> ' +
-          '<span>' + promo.texto + '</span>';
-        content.appendChild(div);
+        var span = document.createElement('span');
+        span.className = 'promo-hero-text' + (i === 0 ? ' active' : '');
+        span.textContent = promo.texto;
+        content.appendChild(span);
       });
 
-      banner.classList.add('visible');
-      header.style.top = '40px';
+      block.style.display = '';
 
       if (promos.length > 1) {
         var current = 0;
         setInterval(function() {
-          var texts = content.querySelectorAll('.promo-text');
+          var texts = content.querySelectorAll('.promo-hero-text');
           texts[current].classList.remove('active');
           current = (current + 1) % texts.length;
           texts[current].classList.add('active');
         }, 4000);
       }
-
-      closeBtn.addEventListener('click', function() {
-        banner.classList.remove('visible');
-        banner.classList.add('hidden');
-        header.style.top = '0';
-        sessionStorage.setItem('promoClosed', '1');
-      });
     }
 
     if (!isLocal) {

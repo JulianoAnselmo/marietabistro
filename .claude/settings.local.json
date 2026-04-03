@@ -35,7 +35,11 @@
       "Bash(git branch:*)",
       "Bash(git pull:*)",
       "Bash(git rebase:*)",
-      "Bash(node scripts/seed-admin.mjs)"
+      "Bash(node scripts/seed-admin.mjs)",
+      "Bash(node scripts/seed-precos.mjs)",
+      "Bash(node -e \"var d=[''domingo'',''segunda'',''terca'',''quarta'',''quinta'',''sexta'',''sabado'']; console.log\\(''Hoje:'', d[new Date\\(\\).getDay\\(\\)]\\)\")",
+      "Bash(ls C:/dev/clientes/marieta/.superpowers/brainstorm/*/state/server-info)",
+      "Bash(cat C:/dev/clientes/marieta/.superpowers/brainstorm/*/state/server-info)"
     ]
   }
 }
