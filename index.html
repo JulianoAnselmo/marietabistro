@@ -1180,6 +1180,19 @@
       font-weight: 500;
       color: var(--cream);
     }
+    .menu-list-item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(255,255,255,0.1);
+      min-width: 20px;
+      margin-bottom: 5px;
+    }
+    .menu-list-item-price {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--gold);
+      white-space: nowrap;
+      font-weight: 500;
+    }
     .menu-list-item-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -2687,6 +2700,17 @@
             name.className = 'menu-list-item-name';
             name.textContent = item.nome;
             header.appendChild(name);
+
+            if (item.preco && item.preco > 0) {
+              var dots = document.createElement('span');
+              dots.className = 'menu-list-item-dots';
+              header.appendChild(dots);
+
+              var price = document.createElement('span');
+              price.className = 'menu-list-item-price';
+              price.textContent = 'R$' + Number(item.preco).toFixed(2).replace('.', ',');
+              header.appendChild(price);
+            }
 
             itemDiv.appendChild(header);
 
