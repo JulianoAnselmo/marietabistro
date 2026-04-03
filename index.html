@@ -711,92 +711,97 @@
       position: relative;
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-image-wrap {
-      position: relative;
-    }
-    .about-image-wrap::before {
-      content: '';
-      position: absolute;
-      top: -12px; left: -12px;
-      width: 100%; height: 100%;
-      border: 2px solid rgba(107, 29, 42, 0.12);
-      border-radius: 20px;
-    }
-    .about-image {
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-    }
-    .about-image img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      transition: transform 0.8s var(--ease-out);
-    }
-    .about-image:hover img {
-      transform: scale(1.03);
-    }
-
     .about .section-label { color: var(--wine); }
     .about .section-label::before { background: var(--wine); }
     .about .section-title { color: var(--text-dark); }
     .about .section-title em { color: var(--wine); }
 
-    .about-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 18px;
-      background: rgba(107, 29, 42, 0.08);
-      border: 1px solid rgba(107, 29, 42, 0.15);
-      border-radius: 100px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      color: var(--wine);
-      margin-bottom: 28px;
+    .about-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 72px;
     }
-    .about-badge svg { stroke: var(--wine); }
+    .about-header .section-label { justify-content: center; }
+    .about-header .section-label::before { display: none; }
 
-    .about-text {
-      font-size: 1.05rem;
+    .about-timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 48px;
+    }
+    .about-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--wine), rgba(107, 29, 42, 0.1));
+    }
+
+    .timeline-chapter {
+      position: relative;
+      margin-bottom: 56px;
+    }
+    .timeline-chapter:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -41px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--wine);
+      border: 3px solid var(--offwhite);
+      box-shadow: 0 0 0 2px var(--wine);
+    }
+    .timeline-chapter.current .timeline-dot {
+      background: var(--gold);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-era {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .timeline-text {
+      font-size: 0.95rem;
       line-height: 1.8;
       color: var(--text-dark-secondary);
-      margin-bottom: 24px;
       font-weight: 300;
+      margin-bottom: 16px;
     }
-
-    .about-quote {
-      padding: 24px 0;
-      margin: 28px 0;
-      border-top: 1px solid rgba(107, 29, 42, 0.12);
-      border-bottom: 1px solid rgba(107, 29, 42, 0.12);
+    .timeline-image {
+      display: inline-block;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border: 3px solid var(--offwhite);
+      outline: 1px solid rgba(107, 29, 42, 0.1);
     }
-    .about-quote p {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-style: italic;
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-    .about-quote cite {
+    .timeline-image img {
+      width: 220px;
+      height: 150px;
+      object-fit: cover;
       display: block;
-      margin-top: 12px;
-      font-family: var(--font-body);
-      font-style: normal;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--wine);
+      transition: transform 0.6s var(--ease-out);
+    }
+    .timeline-image:hover img {
+      transform: scale(1.05);
     }
 
     /* ===== DIFERENCIAIS ===== */
@@ -1912,7 +1917,7 @@
         margin-top: 16px;
       }
 
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-timeline { padding-left: 40px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .menu-list { max-width: 100%; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1936,6 +1941,9 @@
       .hero-content { padding: 0 24px; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
+
+      .about-timeline { padding-left: 32px; }
+      .timeline-image img { width: 180px; height: 120px; }
 
       .features-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: 1fr; }
@@ -2052,25 +2060,36 @@
   <!-- ===== SOBRE ===== -->
   <section class="about" id="sobre">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-image-wrap reveal">
-          <div class="about-image">
-            <img src="imagens/historia-vo-marieta.jpg" alt="Família Cheade e Jacob Vagner — a história por trás do Marieta Bistrô, com fotos da Vó Marieta e do Chef Ricardo Vagner" loading="lazy">
+      <div class="about-header">
+        <div class="section-label reveal">Nossa História</div>
+        <h2 class="section-title reveal reveal-delay-1">Três gerações, um mesmo<br><em>amor à mesa</em></h2>
+      </div>
+      <div class="about-timeline">
+        <div class="timeline-chapter reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-era">Década de 1920</div>
+          <h3 class="timeline-title">A Vovó Marieta</h3>
+          <p class="timeline-text">Dona Marieta, mulher italiana que transformava a cozinha em um lugar mágico, reunia a família ao redor da mesa com receitas que viraram tradição. O amor pela culinária passou de geração em geração.</p>
+          <div class="timeline-image">
+            <img src="imagens/historia-vo-marieta.jpg" alt="Vovó Marieta — a inspiração por trás do restaurante" loading="lazy">
           </div>
         </div>
-        <div class="about-content">
-          <div class="about-badge reveal">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            <span data-count="100">0</span>+ anos de história
+        <div class="timeline-chapter reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-era">O Casarão</div>
+          <h3 class="timeline-title">Um centenário repaginado</h3>
+          <p class="timeline-text">A casa do século XX — presente dado a Mayara, esposa do Chef, por seu avô Ibrahim Cheade — foi cuidadosamente restaurada, preservando a arquitetura original e trazendo conforto contemporâneo ao centro de Taquaritinga.</p>
+          <div class="timeline-image">
+            <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png" alt="Fachada do casarão centenário do Marieta Bistrô" loading="lazy">
           </div>
-          <div class="section-label reveal reveal-delay-1">Nossa História</div>
-          <h2 class="section-title reveal reveal-delay-2">Herança e tradição<br>com <em>alma</em></h2>
-          <p class="about-text reveal reveal-delay-3">Herança e tradição temperadas com um mix de épocas e momentos simbolizam a Vida! Assim, nesta trajetória, desponta o legado das famílias Cheade e Jacob Vagner, que, unificando a paixão de transformar condimentos em experiências gastronômicas originais, perpetuam um sonho.</p>
-          <p class="about-text reveal reveal-delay-4">Pelas mãos do Chef Ricardo Vagner, a comida da Vó Marieta — mulher italiana que transformava a cozinha em um lugar mágico — traz em cada prato uma fábula. O Chef, neto primogênito, guardou consigo memórias que hoje moldam sua paixão pela culinária e homenageia a avó nomeando seu bistrô de Marieta.</p>
-          <p class="about-text reveal reveal-delay-4">O casal, na alquimia da vida, decidiu transformar uma casa do século XX — presente dado a Mayara, esposa do Chef, por seu avô Ibrahim Cheade — neste ambiente acolhedor que, agora repaginado, é o cenário de encontros de gerações que celebram ocasiões memoráveis.</p>
-          <div class="about-quote reveal reveal-delay-5">
-            <p>"Aqui, no Marieta, tudo é preparado na hora, com cuidado e paixão. Nosso objetivo é que, ao sentar-se à mesa, viva uma experiência única de interação."</p>
-            <cite>Mais que um sabor, uma experiência!</cite>
+        </div>
+        <div class="timeline-chapter current reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-era">Hoje</div>
+          <h3 class="timeline-title">Chef Ricardo Vagner</h3>
+          <p class="timeline-text">Neto primogênito da Vovó Marieta, o Chef Ricardo Vagner guardou consigo memórias que hoje moldam sua paixão pela culinária. Com técnica contemporânea e respeito pela tradição, transforma ingredientes regionais em pratos de conceito único.</p>
+          <div class="timeline-image">
+            <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Chef Ricardo Vagner na cozinha do Marieta Bistrô" loading="lazy">
           </div>
         </div>
       </div>
@@ -2662,30 +2681,7 @@
     // Se o Gist não está configurado, o iniciarCardapio já chamou iniciarReveal().
     // Se está configurado, o fetch chama quando termina.
 
-    // ---- Counter animation ----
-    const counterEl = document.querySelector('[data-count]');
-    if (counterEl) {
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const target = parseInt(entry.target.getAttribute('data-count'));
-            let current = 0;
-            const duration = 2000;
-            const step = target / (duration / 16);
-            const timer = setInterval(() => {
-              current += step;
-              if (current >= target) {
-                current = target;
-                clearInterval(timer);
-              }
-              entry.target.textContent = Math.floor(current);
-            }, 16);
-            counterObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      counterObserver.observe(counterEl);
-    }
+
 
     function renderCardapio(cardapioData) {
       var tabsContainer = document.getElementById('menuTabs');
