@@ -1364,7 +1364,7 @@
       margin: 0 auto 24px;
       color: var(--wine);
       background: rgba(107, 29, 42, 0.08);
-      border-radius: 14px;
+      border-radius: 12px;
     }
     .event-icon svg {
       width: 28px; height: 28px;
@@ -1385,34 +1385,19 @@
       color: var(--text-dark-secondary);
       font-weight: 300;
     }
-    .events-cta {
-      text-align: center;
-      margin-top: 56px;
-    }
-    .btn-wine {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
+    .event-cta-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.7rem;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      border-radius: 50px;
-      background: var(--wine);
-      color: var(--cream);
-      transition: all 0.4s var(--ease-out);
-      border: 1px solid var(--wine);
+      color: var(--wine);
+      transition: all 0.3s;
     }
-    .btn-wine:hover {
-      background: var(--wine-deep);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(107, 29, 42, 0.3);
-    }
-    .btn-wine svg {
-      width: 16px; height: 16px;
-      stroke: currentColor; stroke-width: 2; fill: none;
+    .event-cta-link:hover {
+      color: var(--wine-deep);
+      transform: translateX(4px);
     }
 
     /* ===== HOURS ===== */
@@ -2428,32 +2413,23 @@
       </div>
       <div class="events-grid">
         <div class="event-card reveal">
-          <div class="event-icon">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
+          <div class="event-icon"><span style="font-size:1.6rem;">🍽</span></div>
           <h3 class="event-title">Jantares Corporativos</h3>
           <p class="event-desc">Ambiente sofisticado para confraternizações, reuniões de negócios e eventos empresariais com menu exclusivo.</p>
+          <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20jantares%20corporativos%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="event-cta-link">SOLICITAR →</a>
         </div>
         <div class="event-card reveal reveal-delay-1">
-          <div class="event-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
+          <div class="event-icon"><span style="font-size:1.6rem;">🎂</span></div>
           <h3 class="event-title">Aniversários & Comemorações</h3>
           <p class="event-desc">Celebre datas especiais com um menu degustação personalizado e decoração que reflete a ocasião.</p>
+          <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20anivers%C3%A1rios%20e%20comemora%C3%A7%C3%B5es%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="event-cta-link">SOLICITAR →</a>
         </div>
         <div class="event-card reveal reveal-delay-2">
-          <div class="event-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
+          <div class="event-icon"><span style="font-size:1.6rem;">🍷</span></div>
           <h3 class="event-title">Eventos Privados</h3>
           <p class="event-desc">Espaço reservado para grupos de até 60 pessoas, com atendimento exclusivo e cardápio sob medida.</p>
+          <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20eventos%20privados%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="event-cta-link">SOLICITAR →</a>
         </div>
-      </div>
-      <div class="events-cta reveal">
-        <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20eventos%20no%20Marieta%20Bistr%C3%B4." class="btn-wine" target="_blank" rel="noopener">
-          Solicitar Orçamento
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
       </div>
     </div>
   </section>
@@ -2582,14 +2558,10 @@
             </a>
           </div>
         </div>
-        <div class="contact-map reveal reveal-delay-3">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.5!2d-48.5094!3d-21.4050!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDI0JzE4LjAiUyA0OMKwMzAnMzQuMCJX!5e0!3m2!1spt-BR!2sbr!4v1"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Localização do Marieta Bistrô">
-          </iframe>
+        <div class="contact-map reveal reveal-delay-3" id="contactMap">
+          <div style="width:100%;height:100%;background:var(--beige);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:0.8rem;color:var(--text-dark-secondary);">Carregando mapa...</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2650,12 +2622,20 @@
   <script src="cardapio.js"></script>
   <script src="promocoes.js"></script>
   <script>
-    // ---- Preloader ----
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('preloader').classList.add('hidden');
-      }, 2200);
-    });
+    // ---- Preloader (smart: based on real load, max 3s) ----
+    (function() {
+      var preloader = document.getElementById('preloader');
+      var maxTimeout = setTimeout(function() {
+        preloader.classList.add('hidden');
+      }, 3000);
+
+      window.addEventListener('load', function() {
+        clearTimeout(maxTimeout);
+        setTimeout(function() {
+          preloader.classList.add('hidden');
+        }, 600);
+      });
+    })();
 
     // ---- Header scroll + active section ----
     const header = document.getElementById('header');
@@ -3016,6 +2996,36 @@
     } else {
       renderPromocoes(promocoesData);
     }
+    // ---- Lazy load Google Maps ----
+    (function() {
+      var mapContainer = document.getElementById('contactMap');
+      if (!mapContainer) return;
+
+      var mapObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.5!2d-48.5094!3d-21.4050!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDI0JzE4LjAiUyA0OMKwMzAnMzQuMCJX!5e0!3m2!1spt-BR!2sbr!4v1';
+            iframe.allowFullscreen = true;
+            iframe.loading = 'lazy';
+            iframe.referrerPolicy = 'no-referrer-when-downgrade';
+            iframe.title = 'Localização do Marieta Bistrô';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = '0';
+            iframe.style.filter = 'saturate(0.8) brightness(0.95)';
+            iframe.style.transition = 'filter 0.5s';
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+            mapContainer.addEventListener('mouseenter', function() { iframe.style.filter = 'saturate(1) brightness(1)'; });
+            mapContainer.addEventListener('mouseleave', function() { iframe.style.filter = 'saturate(0.8) brightness(0.95)'; });
+            mapObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '200px' });
+
+      mapObserver.observe(mapContainer);
+    })();
   </script>
 </body>
 </html>
