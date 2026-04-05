@@ -31,8 +31,13 @@
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "name": "Marieta Bistrô",
-    "image": "imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png",
-    "servesCuisine": "Gastronomia Autoral",
+    "description": "Restaurante de gastronomia autoral do Chef Ricardo Vagner em um casarão centenário repaginado no coração de Taquaritinga, SP.",
+    "image": [
+      "https://marietabistro.com.br/imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png",
+      "https://marietabistro.com.br/imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png",
+      "https://marietabistro.com.br/imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png"
+    ],
+    "servesCuisine": ["Gastronomia Autoral", "Italiana Contemporânea", "Brasileira"],
     "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
@@ -42,18 +47,77 @@
       "postalCode": "15900-045",
       "addressCountry": "BR"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-21.4050",
+      "longitude": "-48.5094"
+    },
     "telephone": "+55-16-98148-8080",
     "url": "https://marietabistro.com.br",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-      "opens": "19:30",
-      "closes": "23:00"
+    "sameAs": [
+      "https://www.instagram.com/marieta_bistro"
+    ],
+    "menu": "https://marietabistro.menudino.com",
+    "acceptsReservations": "True",
+    "hasMenu": {
+      "@type": "Menu",
+      "name": "Cardápio Marieta Bistrô",
+      "url": "https://marietabistro.menudino.com"
     },
+    "founder": {
+      "@type": "Person",
+      "name": "Chef Ricardo Vagner",
+      "jobTitle": "Chef Executivo"
+    },
+    "foundingDate": "1920",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "19:30",
+        "closes": "23:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Monday",
+        "opens": "00:00",
+        "closes": "00:00"
+      }
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
+      "bestRating": "5",
+      "ratingCount": "128",
       "reviewCount": "128"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Ana Rita Mazza"},
+        "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+        "reviewBody": "Ambiente aconchegante, funcionários atenciosos e a comida é deliciosa."
+      },
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Maria Fernanda Jacob"},
+        "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+        "reviewBody": "Por ser um bistrô de interior, entrega pratos de conceito ímpar!"
+      },
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Natália Amoroso"},
+        "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+        "reviewBody": "Atendimento excelente, ótimas opções no cardápio e ambiente aconchegante."
+      }
+    ],
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4.",
+        "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]
+      }
     }
   }
   </script>
