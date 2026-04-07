@@ -1155,6 +1155,7 @@
     }
     .menu-item {
       display: flex;
+      align-items: flex-start;
       gap: 20px;
       padding: 20px;
       background: rgba(42, 31, 26, 0.6);
@@ -2936,11 +2937,12 @@
       var panelsHtml = '';
       cardapioData.forEach(function(tab, i) {
         panelsHtml += '<div class="menu-panel' + (i === 0 ? ' active' : '') + '" data-panel="' + tab.id + '">';
+        panelsHtml += '<div class="menu-grid">';
 
+        var itemCount = 0;
         tab.categorias.forEach(function(cat) {
-          panelsHtml += '<div class="menu-grid">';
-          cat.itens.forEach(function(item, j) {
-            var delay = j % 4;
+          cat.itens.forEach(function(item) {
+            var delay = itemCount % 4;
             panelsHtml += '<div class="menu-item reveal' + (delay > 0 ? ' reveal-delay-' + delay : '') + '">';
 
             // Image / placeholder
@@ -2971,11 +2973,11 @@
             }
 
             panelsHtml += '</div></div>';
+            itemCount++;
           });
-          panelsHtml += '</div>';
         });
 
-        panelsHtml += '</div>';
+        panelsHtml += '</div></div>';
       });
       panelsContainer.innerHTML = panelsHtml;
 
