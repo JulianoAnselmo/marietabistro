@@ -1107,70 +1107,36 @@
       line-height: 1.7;
       margin-top: 12px;
     }
-    .menu-scroll-wrapper {
+    .menu-tabs {
       display: flex;
-      gap: 0;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
       position: relative;
       z-index: 2;
-      max-width: 1060px;
-      margin: 0 auto;
-    }
-    .menu-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 160px;
-      padding: 8px 0;
-      position: sticky;
-      top: 100px;
-      align-self: flex-start;
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      margin-right: 40px;
-      padding-right: 24px;
     }
     .menu-tab {
-      padding: 10px 16px;
+      padding: 10px 24px;
       font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.03em;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--text-muted);
+      border-radius: 50px;
+      border: 1px solid rgba(246, 241, 223, 0.15);
       background: transparent;
-      border: none;
-      border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s var(--ease-out);
-      text-align: left;
-      white-space: nowrap;
+      letter-spacing: 0.3px;
     }
     .menu-tab:hover {
+      border-color: var(--wine);
       color: var(--cream);
-      background: rgba(255, 255, 255, 0.03);
     }
     .menu-tab.active {
-      color: var(--gold);
-      background: rgba(246, 241, 223, 0.1);
-      font-weight: 500;
-    }
-    .menu-panels-container {
-      flex: 1;
-      min-width: 0;
-      max-height: 75vh;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-    .menu-panels-container::-webkit-scrollbar {
-      width: 4px;
-    }
-    .menu-panels-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .menu-panels-container::-webkit-scrollbar-thumb {
-      background: rgba(246, 241, 223, 0.3);
-      border-radius: 4px;
-    }
-    .menu-panels-container::-webkit-scrollbar-thumb:hover {
-      background: rgba(246, 241, 223, 0.5);
+      background: var(--wine);
+      color: var(--cream);
+      border-color: var(--wine);
     }
     .menu-panel {
       display: none;
@@ -1188,149 +1154,103 @@
       margin: 0 auto;
     }
     .menu-item {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
       background: rgba(42, 31, 26, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
+      border: 1px solid rgba(246, 241, 223, 0.08);
       transition: all 0.4s var(--ease-out);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      overflow: hidden;
     }
     .menu-item:hover {
-      background: rgba(58, 46, 40, 0.8);
-      border-color: rgba(246, 241, 223, 0.15);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+      border-color: rgba(246, 241, 223, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
-    .menu-item-img {
-      width: 100%;
-      height: 200px;
+    .menu-item-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
       overflow: hidden;
-      position: relative;
+      flex-shrink: 0;
       background: rgba(246, 241, 223, 0.05);
     }
-    .menu-item-img img {
+    .menu-item-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s var(--ease-out);
     }
-    .menu-item:hover .menu-item-img img {
-      transform: scale(1.06);
-    }
-    /* Placeholder when image is missing */
-    .menu-item-img-placeholder {
+    .menu-item-placeholder {
       width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background:
-        linear-gradient(135deg, rgba(246, 241, 223, 0.06) 0%, rgba(3, 36, 57, 0.08) 100%);
-    }
-    .menu-item-img-placeholder svg {
-      width: 36px; height: 36px;
-      stroke: var(--text-muted);
-      stroke-width: 1;
-      fill: none;
-      opacity: 0.4;
-    }
-    .menu-item-img-placeholder span {
-      font-size: 0.65rem;
       color: var(--text-muted);
-      opacity: 0.4;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      opacity: 0.3;
     }
-    .menu-item-body {
-      padding: 24px 28px 28px;
+    .menu-item-placeholder svg {
+      width: 28px;
+      height: 28px;
+    }
+    .menu-item-content {
+      flex: 1;
+      min-width: 0;
     }
     .menu-item-header {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 8px;
-      gap: 16px;
+      gap: 12px;
+      margin-bottom: 6px;
     }
     .menu-item-name {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 500;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--cream);
     }
     .menu-item-price {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--gold);
       white-space: nowrap;
-      font-weight: 500;
     }
     .menu-item-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.6;
+      line-height: 1.5;
     }
-    /* List-style menu layout */
-    .menu-list {
-      max-width: 800px;
-      margin: 0 auto;
+    .menu-item-obs {
+      font-size: 0.78rem;
+      color: var(--wine-light);
+      font-weight: 500;
+      margin-top: 4px;
     }
-    .menu-list-category {
-      margin-bottom: 48px;
-    }
-    .menu-list-category:last-child {
-      margin-bottom: 0;
-    }
-    .menu-list-category-title {
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 32px;
-    }
-    .menu-list-item {
-      margin-bottom: 28px;
-    }
-    .menu-list-item:last-child {
-      margin-bottom: 0;
-    }
-    .menu-list-item-header {
+    .menu-item-tags {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 6px;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
     }
-    .menu-list-item-name {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 400;
+    .menu-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(246, 241, 223, 0.1);
+      color: var(--gold);
+    }
+    .menu-tag.destaque {
+      background: var(--wine);
       color: var(--cream);
     }
-    .menu-list-item-price {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--gold);
-      white-space: nowrap;
-      font-weight: 300;
-    }
-    .menu-list-item-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.6;
-    }
-    .menu-list-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 12px;
-      font-weight: 300;
+    .menu-tag.mais-pedido {
+      background: var(--gold);
+      color: var(--dark);
     }
     .menu-list-item-badge {
       display: inline-block;
@@ -2120,41 +2040,7 @@
 
       .about-timeline { padding-left: 40px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .menu-list { max-width: 100%; }
-      .menu-scroll-wrapper { display: block; }
-      .menu-categories {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-        margin: 0 0 24px;
-        padding: 0 0 12px;
-        min-width: 0;
-        width: 100%;
-        position: relative;
-        top: auto;
-        align-self: auto;
-      }
-      .menu-categories::-webkit-scrollbar { display: none; }
-      .menu-categories::after {
-        content: '→';
-        position: sticky;
-        right: 0;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        padding: 0 4px 0 16px;
-        background: linear-gradient(90deg, transparent, var(--dark) 60%);
-        color: var(--gold);
-        font-size: 0.7rem;
-        pointer-events: none;
-      }
-      .menu-tab { flex-shrink: 0; }
-      .menu-panels-container { max-height: none; overflow-y: visible; }
+      .menu-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
       .schedule-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-carousel { max-width: 100%; }
@@ -2181,44 +2067,11 @@
       .about-timeline { padding-left: 32px; }
       .timeline-image img { width: 100%; height: 320px; }
 
-      .menu-scroll-wrapper {
-        display: block;
-      }
-      .menu-categories {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-        margin: 0 0 16px;
-        padding: 0 0 10px;
-        min-width: 0;
-        width: 100%;
-        position: relative;
-        top: auto;
-        align-self: auto;
-        gap: 4px;
-      }
-      .menu-categories::-webkit-scrollbar { display: none; }
-      .menu-categories::after {
-        content: '→';
-        position: sticky;
-        right: 0;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        padding: 0 4px 0 16px;
-        background: linear-gradient(90deg, transparent, var(--dark) 60%);
-        color: var(--gold);
-        font-size: 0.7rem;
-        pointer-events: none;
-      }
-      .menu-tab { padding: 8px 14px; font-size: 0.65rem; white-space: nowrap; flex-shrink: 0; }
-      .menu-panels-container { max-height: none; overflow-y: visible; }
-      .menu-list-item-name { font-size: 1.1rem; }
+      .menu-tabs { gap: 6px; }
+      .menu-tab { padding: 8px 16px; font-size: 0.8rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-item-image { width: 80px; height: 80px; }
+      .menu-item { padding: 16px; gap: 14px; }
 
       .features-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: 1fr; }
@@ -2440,17 +2293,15 @@
   <section class="menu grain" id="cardapio">
     <div class="container">
       <div class="menu-header">
-        <div class="section-label reveal">Cardápio</div>
-        <h2 class="section-title reveal reveal-delay-1">Sabores que <em>encantam</em></h2>
+        <div class="section-label reveal">Gastronomia</div>
+        <h2 class="section-title reveal reveal-delay-1">Nosso <em>Cardápio</em></h2>
         <p class="menu-subtitle reveal reveal-delay-2">Gastronomia autoral assinada pelo Chef Ricardo Vagner. Cada escolha é uma celebração da vida, da autenticidade e do sabor que o momento requer.</p>
       </div>
-
-      <!-- Tabs e painéis gerados via JS a partir do JSON abaixo -->
-      <div class="menu-scroll-wrapper reveal">
-        <div class="menu-categories" id="menuTabs"></div>
-        <div class="menu-panels-container" id="menuPanelsWrap">
-          <div id="menuPanels"></div>
-        </div>
+      <div class="menu-tabs reveal" id="menuTabs">
+        <!-- Tabs generated by JS -->
+      </div>
+      <div id="menuPanels">
+        <!-- Panels generated by JS -->
       </div>
       <p class="menu-note reveal">* Cardápio sujeito a alterações conforme disponibilidade de ingredientes sazonais</p>
     </div>
@@ -3004,93 +2855,75 @@
       var panelsContainer = document.getElementById('menuPanels');
       var placeholderSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>';
 
-      cardapioData.forEach(function(tab, tabIndex) {
-        var btn = document.createElement('button');
-        btn.className = 'menu-tab' + (tabIndex === 0 ? ' active' : '');
-        btn.textContent = tab.label;
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.menu-panel').forEach(function(p) { p.classList.remove('active'); });
-          document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
-          var activePanel = document.getElementById('panel-' + tab.id);
-          activePanel.classList.add('active');
-          var wrapper = document.getElementById('menuPanelsWrap');
-          if (wrapper) wrapper.scrollTop = 0;
-          btn.classList.add('active');
-          document.querySelectorAll('#panel-' + tab.id + ' .reveal').forEach(function(el) {
-            el.classList.remove('visible');
-            setTimeout(function() { el.classList.add('visible'); }, 50);
-          });
-        });
-        tabsContainer.appendChild(btn);
+      // Build tabs
+      var tabsHtml = '';
+      cardapioData.forEach(function(tab, i) {
+        tabsHtml += '<button class="menu-tab' + (i === 0 ? ' active' : '') + '" data-tab="' + tab.id + '">' + tab.label + '</button>';
+      });
+      tabsContainer.innerHTML = tabsHtml;
 
-        var panel = document.createElement('div');
-        panel.className = 'menu-panel' + (tabIndex === 0 ? ' active' : '');
-        panel.id = 'panel-' + tab.id;
+      // Build panels
+      var panelsHtml = '';
+      cardapioData.forEach(function(tab, i) {
+        panelsHtml += '<div class="menu-panel' + (i === 0 ? ' active' : '') + '" data-panel="' + tab.id + '">';
 
         tab.categorias.forEach(function(cat) {
-          var catTitle = document.createElement('h3');
-          catTitle.className = 'menu-list-category-title reveal';
-          catTitle.textContent = cat.titulo;
-          panel.appendChild(catTitle);
-
-          var grid = document.createElement('div');
-          grid.className = 'menu-grid';
-
+          panelsHtml += '<div class="menu-grid">';
           cat.itens.forEach(function(item, j) {
             var delay = j % 4;
-            var card = document.createElement('div');
-            card.className = 'menu-item reveal' + (delay > 0 ? ' reveal-delay-' + delay : '');
+            panelsHtml += '<div class="menu-item reveal' + (delay > 0 ? ' reveal-delay-' + delay : '') + '">';
 
-            var imgDiv = document.createElement('div');
-            imgDiv.className = 'menu-item-img';
+            // Image / placeholder
+            panelsHtml += '<div class="menu-item-image">';
             if (item.imagem) {
-              imgDiv.innerHTML = '<img src="' + item.imagem + '" alt="' + item.nome + '" loading="lazy">';
+              panelsHtml += '<img src="' + item.imagem + '" alt="' + item.nome + '" loading="lazy">';
             } else {
-              imgDiv.innerHTML = '<div class="menu-item-img-placeholder">' + placeholderSvg + '<span>' + item.nome.split(' ')[0] + '</span></div>';
+              panelsHtml += '<div class="menu-item-placeholder">' + placeholderSvg + '</div>';
             }
-            card.appendChild(imgDiv);
+            panelsHtml += '</div>';
 
-            var body = document.createElement('div');
-            body.className = 'menu-item-body';
-
-            var header = document.createElement('div');
-            header.className = 'menu-item-header';
-            header.innerHTML = '<span class="menu-item-name">' + item.nome + '</span>';
+            // Content
+            panelsHtml += '<div class="menu-item-content">';
+            panelsHtml += '<div class="menu-item-header">';
+            panelsHtml += '<span class="menu-item-name">' + item.nome + '</span>';
             if (item.preco && item.preco > 0) {
               var p = Number(item.preco);
-              header.innerHTML += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',')) + '</span>';
+              panelsHtml += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',')) + '</span>';
             }
-            body.appendChild(header);
+            panelsHtml += '</div>';
 
             if (item.desc) {
-              var desc = document.createElement('p');
-              desc.className = 'menu-item-desc';
-              desc.textContent = item.desc;
-              body.appendChild(desc);
+              panelsHtml += '<p class="menu-item-desc">' + item.desc + '</p>';
             }
 
             if (item.destaque) {
-              var badge = document.createElement('span');
-              badge.className = 'menu-list-item-badge';
-              badge.textContent = 'Favorito do Chef';
-              body.appendChild(badge);
+              panelsHtml += '<span class="menu-list-item-badge">Favorito do Chef</span>';
             }
 
-            card.appendChild(body);
-            grid.appendChild(card);
+            panelsHtml += '</div></div>';
           });
-
-          panel.appendChild(grid);
-
-          if (cat.nota) {
-            var nota = document.createElement('p');
-            nota.className = 'menu-list-note reveal';
-            nota.textContent = cat.nota;
-            panel.appendChild(nota);
-          }
+          panelsHtml += '</div>';
         });
 
-        panelsContainer.appendChild(panel);
+        panelsHtml += '</div>';
+      });
+      panelsContainer.innerHTML = panelsHtml;
+
+      // Tab click handlers
+      document.querySelectorAll('.menu-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
+          document.querySelectorAll('.menu-panel').forEach(function(p) { p.classList.remove('active'); });
+          tab.classList.add('active');
+          var panel = document.querySelector('[data-panel="' + tab.dataset.tab + '"]');
+          if (panel) {
+            panel.classList.add('active');
+            panel.querySelectorAll('.reveal').forEach(function(el) {
+              el.classList.remove('visible');
+              setTimeout(function() { el.classList.add('visible'); }, 50);
+            });
+          }
+        });
       });
     }
 
