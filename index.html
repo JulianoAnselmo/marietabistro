@@ -28,12 +28,39 @@
   <link rel="canonical" href="https://marietabistro.com.br">
 
   <!-- Favicon SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%236B1D2A'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='60' font-weight='400' font-style='italic' fill='%23C9A84C' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23032439'/%3E%3Ctext x='50' y='75' font-family='cursive' font-size='80' font-weight='400' fill='%23F6F1DF' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Fonts (local) -->
+  <style>
+    @font-face {
+      font-family: 'Bodoni XT';
+      src: url('fonts/BodoniXT.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Hattinand';
+      src: url('fonts/Hattinand.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Be Vietnam Pro';
+      src: url('fonts/BeVietnamPro-ExtraLight.ttf') format('truetype');
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Be Vietnam Pro';
+      src: url('fonts/BeVietnamPro-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -135,30 +162,31 @@
   <style>
     /* ===== CSS VARIABLES ===== */
     :root {
-      --wine: #6B1D2A;
-      --wine-deep: #4A1219;
-      --wine-light: #8B2E3E;
-      --bordo: #7A2038;
-      --terracotta: #B8654A;
-      --terracotta-soft: #C4836E;
-      --gold: #C9A84C;
-      --gold-light: #D4B96A;
-      --gold-muted: rgba(201, 168, 76, 0.15);
-      --cream: #F5EDE4;
-      --cream-warm: #EDE3D6;
-      --offwhite: #FAF7F2;
-      --beige: #D9CCBC;
-      --dark: #1A1210;
-      --dark-warm: #2A1F1A;
-      --dark-mid: #3A2E28;
-      --text-light: #F5EDE4;
-      --text-dark: #2A1F1A;
+      --wine: #032439;
+      --wine-deep: #021B2B;
+      --wine-light: #0A3A5C;
+      --bordo: #032439;
+      --terracotta: #0A3A5C;
+      --terracotta-soft: #1A5276;
+      --gold: #F6F1DF;
+      --gold-light: #FAF7EE;
+      --gold-muted: rgba(246, 241, 223, 0.15);
+      --cream: #F6F1DF;
+      --cream-warm: #EDE8D6;
+      --offwhite: #FBF8F0;
+      --beige: #DDD8C6;
+      --dark: #30251E;
+      --dark-warm: #3A2E26;
+      --dark-mid: #4A3E36;
+      --text-light: #F6F1DF;
+      --text-dark: #30251E;
       --text-dark-secondary: #5A4D42;
       --text-body: #D4CBC2;
       --text-muted: #A89E94;
 
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Outfit', sans-serif;
+      --font-display: 'Bodoni XT', Georgia, serif;
+      --font-subtitle: 'Hattinand', cursive;
+      --font-body: 'Be Vietnam Pro', sans-serif;
 
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -215,21 +243,17 @@
       visibility: hidden;
     }
     .preloader-logo {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      color: var(--cream);
-      letter-spacing: 0.05em;
       opacity: 0;
       animation: preloaderFade 1.2s var(--ease-out) 0.2s forwards;
     }
-    .preloader-logo span {
-      color: var(--gold);
-      font-style: italic;
+    .preloader-logo-img {
+      height: 160px;
+      width: auto;
     }
     .preloader-bar {
       width: 120px;
       height: 2px;
-      background: rgba(201,168,76,0.15);
+      background: rgba(246, 241, 223,0.15);
       border-radius: 2px;
       margin-top: 24px;
       overflow: hidden;
@@ -349,9 +373,12 @@
       line-height: 1.15;
       color: var(--text-light);
       margin-bottom: 20px;
+      text-transform: uppercase;
     }
     .section-title em {
-      font-style: italic;
+      font-family: var(--font-subtitle);
+      font-style: normal;
+      text-transform: none;
       color: var(--gold);
     }
 
@@ -394,19 +421,19 @@
       background: var(--wine-light);
       border-color: var(--terracotta-soft);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(107, 29, 42, 0.4);
+      box-shadow: 0 8px 30px rgba(3, 36, 57, 0.4);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--cream);
-      border: 1px solid rgba(201, 168, 76, 0.4);
+      border: 1px solid rgba(246, 241, 223, 0.4);
     }
     .btn-outline:hover {
       border-color: var(--gold);
       color: var(--gold);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
+      box-shadow: 0 8px 30px rgba(246, 241, 223, 0.15);
     }
 
     .btn-icon {
@@ -443,23 +470,20 @@
       transition: all 0.5s var(--ease-out);
     }
     .header.scrolled {
-      background: rgba(26, 18, 16, 0.95);
+      background: rgba(48, 37, 30, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      border-bottom: 1px solid rgba(246, 241, 223, 0.08);
       height: 70px;
     }
 
     .header-logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      color: var(--cream);
+      display: flex;
+      align-items: center;
     }
-    .header-logo span {
-      color: var(--gold);
-      font-style: italic;
+    .header-logo-img {
+      height: 220px;
+      width: auto;
     }
 
     .header-nav {
@@ -548,8 +572,8 @@
       inset: 0;
       z-index: 0;
       background:
-        radial-gradient(ellipse at 70% 40%, rgba(107, 29, 42, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(201, 168, 76, 0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 40%, rgba(3, 36, 57, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(246, 241, 223, 0.06) 0%, transparent 40%),
         var(--dark);
     }
 
@@ -579,7 +603,7 @@
       font-weight: 400;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.6);
+      color: rgba(246, 241, 223, 0.6);
       margin-bottom: 24px;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.3s forwards;
@@ -592,11 +616,14 @@
       line-height: 1.1;
       color: var(--cream);
       margin-bottom: 20px;
+      text-transform: uppercase;
       opacity: 0;
       animation: fadeUp 1s var(--ease-out) 0.5s forwards;
     }
     .hero-title em {
-      font-style: italic;
+      font-family: var(--font-subtitle);
+      font-style: normal;
+      text-transform: none;
       color: var(--gold);
       font-weight: 400;
     }
@@ -624,12 +651,12 @@
 
     .hero-secondary-cta {
       font-size: 0.75rem;
-      color: rgba(201, 168, 76, 0.5);
+      color: rgba(246, 241, 223, 0.5);
       letter-spacing: 0.05em;
     }
     .hero-secondary-cta a {
       color: var(--gold);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+      border-bottom: 1px solid rgba(246, 241, 223, 0.3);
       padding-bottom: 2px;
       transition: all 0.3s;
     }
@@ -674,7 +701,7 @@
     .hero-info-divider {
       width: 40px;
       height: 1px;
-      background: rgba(201, 168, 76, 0.2);
+      background: rgba(246, 241, 223, 0.2);
       align-self: flex-end;
     }
 
@@ -746,7 +773,7 @@
       top: 0;
       bottom: 0;
       width: 1px;
-      background: linear-gradient(to bottom, var(--wine), rgba(107, 29, 42, 0.1));
+      background: linear-gradient(to bottom, var(--wine), rgba(3, 36, 57, 0.1));
     }
 
     .timeline-chapter {
@@ -800,7 +827,7 @@
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       border: 3px solid var(--offwhite);
-      outline: 1px solid rgba(107, 29, 42, 0.1);
+      outline: 1px solid rgba(3, 36, 57, 0.1);
     }
     .timeline-image img {
       width: 280px;
@@ -825,8 +852,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 20% 80%, rgba(107, 29, 42, 0.12), transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.06), transparent 50%);
+        radial-gradient(ellipse at 20% 80%, rgba(3, 36, 57, 0.12), transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(246, 241, 223, 0.06), transparent 50%);
     }
 
     .features-header {
@@ -869,7 +896,7 @@
     }
     .feature-card:hover {
       background: rgba(58, 46, 40, 0.9);
-      border-color: rgba(201, 168, 76, 0.2);
+      border-color: rgba(246, 241, 223, 0.2);
       transform: translateY(-6px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
@@ -883,7 +910,7 @@
       justify-content: center;
       margin-bottom: 24px;
       color: var(--gold);
-      background: rgba(201, 168, 76, 0.1);
+      background: rgba(246, 241, 223, 0.1);
       border-radius: 14px;
     }
     .feature-icon svg {
@@ -975,7 +1002,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.8);
+      color: rgba(246, 241, 223, 0.8);
       margin-bottom: 4px;
     }
     .gallery-caption-title {
@@ -1058,8 +1085,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 30% 70%, rgba(107, 29, 42, 0.1), transparent 50%),
-        radial-gradient(ellipse at 70% 30%, rgba(201, 168, 76, 0.05), transparent 50%);
+        radial-gradient(ellipse at 30% 70%, rgba(3, 36, 57, 0.1), transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(246, 241, 223, 0.05), transparent 50%);
     }
     .menu-header {
       text-align: center;
@@ -1122,7 +1149,7 @@
     }
     .menu-tab.active {
       color: var(--gold);
-      background: rgba(201, 168, 76, 0.1);
+      background: rgba(246, 241, 223, 0.1);
       font-weight: 500;
     }
     .menu-panels-container {
@@ -1139,11 +1166,11 @@
       background: rgba(255, 255, 255, 0.02);
     }
     .menu-panels-container::-webkit-scrollbar-thumb {
-      background: rgba(201, 168, 76, 0.3);
+      background: rgba(246, 241, 223, 0.3);
       border-radius: 4px;
     }
     .menu-panels-container::-webkit-scrollbar-thumb:hover {
-      background: rgba(201, 168, 76, 0.5);
+      background: rgba(246, 241, 223, 0.5);
     }
     .menu-panel {
       display: none;
@@ -1171,7 +1198,7 @@
     }
     .menu-item:hover {
       background: rgba(58, 46, 40, 0.8);
-      border-color: rgba(201, 168, 76, 0.15);
+      border-color: rgba(246, 241, 223, 0.15);
       transform: translateY(-4px);
       box-shadow: 0 12px 36px rgba(0,0,0,0.3);
     }
@@ -1180,7 +1207,7 @@
       height: 200px;
       overflow: hidden;
       position: relative;
-      background: rgba(201, 168, 76, 0.05);
+      background: rgba(246, 241, 223, 0.05);
     }
     .menu-item-img img {
       width: 100%;
@@ -1201,7 +1228,7 @@
       justify-content: center;
       gap: 10px;
       background:
-        linear-gradient(135deg, rgba(201, 168, 76, 0.06) 0%, rgba(107, 29, 42, 0.08) 100%);
+        linear-gradient(135deg, rgba(246, 241, 223, 0.06) 0%, rgba(3, 36, 57, 0.08) 100%);
     }
     .menu-item-img-placeholder svg {
       width: 36px; height: 36px;
@@ -1309,7 +1336,7 @@
       display: inline-block;
       margin-top: 6px;
       font-size: 0.65rem;
-      background: rgba(201, 168, 76, 0.1);
+      background: rgba(246, 241, 223, 0.1);
       color: var(--gold);
       padding: 3px 10px;
       border-radius: 12px;
@@ -1356,7 +1383,7 @@
     .event-card {
       padding: 44px 32px;
       background: var(--offwhite);
-      border: 1px solid rgba(107, 29, 42, 0.08);
+      border: 1px solid rgba(3, 36, 57, 0.08);
       border-radius: 16px;
       text-align: center;
       transition: all 0.5s var(--ease-out);
@@ -1374,8 +1401,8 @@
     }
     .event-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(107, 29, 42, 0.1);
-      border-color: rgba(107, 29, 42, 0.15);
+      box-shadow: 0 12px 40px rgba(3, 36, 57, 0.1);
+      border-color: rgba(3, 36, 57, 0.15);
     }
     .event-card:hover::before { opacity: 1; }
     .event-icon {
@@ -1386,7 +1413,7 @@
       justify-content: center;
       margin: 0 auto 24px;
       color: var(--wine);
-      background: rgba(107, 29, 42, 0.08);
+      background: rgba(3, 36, 57, 0.08);
       border-radius: 12px;
     }
     .event-icon svg {
@@ -1442,12 +1469,12 @@
       padding: 28px 32px;
       flex: 1;
       max-width: 160px;
-      border-right: 1px solid rgba(201,168,76,0.08);
+      border-right: 1px solid rgba(246, 241, 223,0.08);
       transition: all 0.3s var(--ease-out);
     }
     .hours-day:last-child { border-right: none; }
     .hours-day:hover {
-      background: rgba(201,168,76,0.04);
+      background: rgba(246, 241, 223,0.04);
     }
     .hours-day-name {
       font-family: var(--font-display);
@@ -1499,13 +1526,13 @@
       background: #fff;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(107, 29, 42, 0.08);
+      border: 1px solid rgba(3, 36, 57, 0.08);
       transition: all 0.4s var(--ease-out);
     }
     .schedule-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(107, 29, 42, 0.1);
-      border-color: rgba(107, 29, 42, 0.15);
+      box-shadow: 0 12px 40px rgba(3, 36, 57, 0.1);
+      border-color: rgba(3, 36, 57, 0.15);
     }
     .schedule-card-img {
       width: 100%;
@@ -1559,8 +1586,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 30% 0%, rgba(107, 29, 42, 0.1), transparent 50%),
-        radial-gradient(ellipse at 70% 100%, rgba(201, 168, 76, 0.06), transparent 50%);
+        radial-gradient(ellipse at 30% 0%, rgba(3, 36, 57, 0.1), transparent 50%),
+        radial-gradient(ellipse at 70% 100%, rgba(246, 241, 223, 0.06), transparent 50%);
     }
 
     .testimonials-header {
@@ -1619,8 +1646,8 @@
     }
     .testimonial-card {
       padding: 48px 44px;
-      background: rgba(107, 29, 42, 0.1);
-      border: 1px solid rgba(107, 29, 42, 0.2);
+      background: rgba(3, 36, 57, 0.1);
+      border: 1px solid rgba(3, 36, 57, 0.2);
       border-radius: 20px;
       text-align: center;
       position: relative;
@@ -1628,7 +1655,7 @@
     .testimonial-quote-mark {
       font-family: var(--font-display);
       font-size: 4rem;
-      color: rgba(201, 168, 76, 0.15);
+      color: rgba(246, 241, 223, 0.15);
       position: absolute;
       top: 12px;
       left: 28px;
@@ -1753,7 +1780,7 @@
     .experience-hours {
       margin-top: 48px;
       padding-top: 32px;
-      border-top: 1px solid rgba(201, 168, 76, 0.12);
+      border-top: 1px solid rgba(246, 241, 223, 0.12);
       display: flex;
       justify-content: center;
       gap: 40px;
@@ -1915,7 +1942,7 @@
     .contact-link:hover {
       border-color: var(--wine);
       transform: translateX(4px);
-      box-shadow: 0 4px 16px rgba(107, 29, 42, 0.1);
+      box-shadow: 0 4px 16px rgba(3, 36, 57, 0.1);
     }
     .contact-link svg { stroke: var(--wine) !important; fill: none !important; }
     .contact-link:first-child svg { fill: #25D366 !important; stroke: none !important; }
@@ -1946,7 +1973,7 @@
     .footer {
       padding: 60px 0 32px;
       background: var(--dark);
-      border-top: 1px solid rgba(201, 168, 76, 0.06);
+      border-top: 1px solid rgba(246, 241, 223, 0.06);
       position: relative;
     }
 
@@ -2073,7 +2100,7 @@
         flex-direction: column;
         position: fixed;
         inset: 0;
-        background: rgba(26, 18, 16, 0.98);
+        background: rgba(48, 37, 30, 0.98);
         backdrop-filter: blur(20px);
         justify-content: center;
         align-items: center;
@@ -2235,13 +2262,13 @@
 
   <!-- ===== PRELOADER ===== -->
   <div class="preloader" id="preloader">
-    <div class="preloader-logo">Marieta <span>Bistrô</span></div>
+    <div class="preloader-logo"><img src="imagens/logo-marieta.png" alt="Marieta Bistrô & Buffet" class="preloader-logo-img"></div>
     <div class="preloader-bar"></div>
   </div>
 
   <!-- ===== HEADER ===== -->
   <header class="header" id="header">
-    <a href="#" class="header-logo">Marieta <span>Bistrô</span></a>
+    <a href="#" class="header-logo"><img src="imagens/logo-marieta.png" alt="Marieta Bistrô & Buffet" class="header-logo-img"></a>
     <nav class="header-nav" id="nav">
       <a href="#sobre" data-section="sobre">Sobre</a>
       <a href="#cardapio" data-section="cardapio">Cardápio</a>
