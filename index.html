@@ -10,11 +10,21 @@
   <meta property="og:title" content="Marieta Bistrô | Gastronomia Autoral em Taquaritinga">
   <meta property="og:description" content="Um casarão centenário repaginado no coração de Taquaritinga. Conforto, requinte e gastronomia autoral assinada pelo Chef Ricardo Vagner.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://marietabistro.com.br">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:image" content="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png">
+  <meta property="og:image" content="https://marietabistro.com.br/imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png">
+  <meta property="og:image:secure_url" content="https://marietabistro.com.br/imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Marieta Bistrô — Gastronomia autoral em Taquaritinga, SP">
+  <meta property="og:site_name" content="Marieta Bistrô">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Marieta Bistrô | Gastronomia Autoral em Taquaritinga">
+  <meta name="twitter:description" content="Gastronomia autoral do Chef Ricardo Vagner em um casarão centenário. Reserve sua mesa.">
+  <meta name="twitter:image" content="https://marietabistro.com.br/imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png">
+
   <link rel="canonical" href="https://marietabistro.com.br">
 
   <!-- Favicon SVG -->
@@ -793,8 +803,8 @@
       outline: 1px solid rgba(107, 29, 42, 0.1);
     }
     .timeline-image img {
-      width: 220px;
-      height: 180px;
+      width: 280px;
+      height: 360px;
       object-fit: cover;
       object-position: top center;
       display: block;
@@ -987,10 +997,6 @@
     }
     .gallery-item:nth-child(4) {
       aspect-ratio: 1;
-    }
-    .gallery-item:nth-child(5) {
-      grid-column: span 3;
-      aspect-ratio: 3/1;
     }
 
     /* Lightbox */
@@ -1463,6 +1469,85 @@
       font-size: 0.72rem;
     }
 
+    /* ===== PROGRAMACAO DA SEMANA ===== */
+    .schedule {
+      padding: 120px 0;
+      background: var(--offwhite);
+    }
+    .schedule-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
+    .schedule-header .section-label { justify-content: center; color: var(--wine); }
+    .schedule-header .section-label::before { display: none; }
+    .schedule .section-title { color: var(--text-dark); }
+    .schedule .section-title em { color: var(--wine); }
+    .schedule-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-dark-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .schedule-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(107, 29, 42, 0.08);
+      transition: all 0.4s var(--ease-out);
+    }
+    .schedule-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(107, 29, 42, 0.1);
+      border-color: rgba(107, 29, 42, 0.15);
+    }
+    .schedule-card-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: var(--cream-warm);
+    }
+    .schedule-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .schedule-card:hover .schedule-card-img img {
+      transform: scale(1.06);
+    }
+    .schedule-card-body {
+      padding: 24px;
+      text-align: center;
+    }
+    .schedule-day {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+    .schedule-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .schedule-desc {
+      font-size: 0.85rem;
+      color: var(--text-dark-secondary);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
     /* ===== TESTIMONIALS ===== */
     .testimonials {
       padding: 120px 0;
@@ -1723,7 +1808,7 @@
     }
     .instagram-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
     .instagram-item {
@@ -2044,13 +2129,13 @@
       .menu-tab { flex-shrink: 0; }
       .menu-panels-container { max-height: none; overflow-y: visible; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
+      .schedule-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-carousel { max-width: 100%; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
 
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item:nth-child(1) { grid-column: span 2; }
       .gallery-item:nth-child(2) { grid-row: auto; }
-      .gallery-item:nth-child(5) { grid-column: span 2; }
 
       .instagram-grid { grid-template-columns: repeat(3, 1fr); }
       .hours-grid { flex-wrap: wrap; }
@@ -2064,9 +2149,10 @@
       .hero-info-divider { display: none; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
+      .hero-scroll { left: 0; right: 0; transform: none; display: flex; flex-direction: column; align-items: center; }
 
       .about-timeline { padding-left: 32px; }
-      .timeline-image img { width: 180px; height: 120px; }
+      .timeline-image img { width: 100%; height: 320px; }
 
       .menu-scroll-wrapper {
         display: block;
@@ -2109,13 +2195,13 @@
 
       .features-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: 1fr; }
+      .schedule-grid { grid-template-columns: 1fr; }
 
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item:nth-child(1),
       .gallery-item:nth-child(2),
       .gallery-item:nth-child(3),
-      .gallery-item:nth-child(4),
-      .gallery-item:nth-child(5) {
+      .gallery-item:nth-child(4) {
         grid-column: auto;
         grid-row: auto;
         aspect-ratio: 16/10;
@@ -2133,7 +2219,7 @@
 
       .header { padding: 0 20px; }
 
-      .about, .features, .gallery, .testimonials, .contact, .menu, .events {
+      .about, .features, .gallery, .testimonials, .contact, .menu, .events, .schedule {
         padding: 80px 0;
       }
       .experience { padding: 100px 0; }
@@ -2181,28 +2267,16 @@
         <h1 class="hero-title">Onde a história<br>encontra o <em>sabor</em></h1>
         <p class="hero-subtitle">Um casarão centenário que guarda memórias de família e serve gastronomia autoral do Chef Ricardo Vagner.</p>
         <div class="hero-actions">
-          <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener" class="btn btn-primary">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            Reserve sua mesa
+          <a href="#cardapio" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Ver Cardápio
           </a>
           <div class="hero-secondary-cta">
-            ou <a href="#cardapio">explore o cardápio</a>
+            ou <a href="https://wa.me/5516981488080?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Marieta%20Bistr%C3%B4." target="_blank" rel="noopener">reserve sua mesa</a>
           </div>
         </div>
       </div>
       <div class="hero-right">
-        <div class="hero-info-block">
-          <div class="hero-info-label">Funcionamento</div>
-          <div class="hero-info-value">Terça a Domingo</div>
-          <div class="hero-info-value"><span class="gold">19h30 — 23h</span></div>
-        </div>
-        <div class="hero-info-divider"></div>
-        <div class="hero-info-block">
-          <div class="hero-info-label">Avaliações</div>
-          <div class="hero-info-stars">★★★★★</div>
-          <div class="hero-info-value">4.9 no Google</div>
-        </div>
-        <div class="hero-info-divider"></div>
         <div class="hero-info-block" id="promoHeroBadge" style="display:none;">
           <div class="hero-info-label">Promoção de hoje</div>
           <div class="hero-info-value" id="promoContent" style="color:var(--gold);"></div>
@@ -2310,10 +2384,10 @@
         </div>
         <div class="feature-card reveal reveal-delay-4">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
           </div>
-          <h3 class="feature-title">Ocasiões Especiais</h3>
-          <p class="feature-desc">Aniversários, encontros românticos ou jantares entre amigos — o cenário perfeito para criar memórias inesquecíveis.</p>
+          <h3 class="feature-title">Música ao Vivo</h3>
+          <p class="feature-desc">Alguns sábados contam com música ao vivo para tornar a noite ainda mais especial. Consulte nossa programação!</p>
         </div>
         <div class="feature-card reveal reveal-delay-5">
           <div class="feature-icon">
@@ -2385,13 +2459,6 @@
           </div>
         </div>
         <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(this)">
-          <img src="imagens/historia-familia.jpg" alt="História da família por trás do Marieta Bistrô" loading="lazy">
-          <div class="gallery-caption">
-            <div class="gallery-caption-label">A Família</div>
-            <div class="gallery-caption-title">Raízes e tradição</div>
-          </div>
-        </div>
-        <div class="gallery-item reveal reveal-delay-4" onclick="openLightbox(this)">
           <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png" alt="Bar e atmosfera do Marieta Bistrô" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">A Cozinha</div>
@@ -2433,6 +2500,49 @@
         <div class="hours-day reveal reveal-delay-3">
           <div class="hours-day-name">Domingo</div>
           <div class="hours-day-time">19h30 — 23h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMAÇÃO DA SEMANA ===== -->
+  <section class="schedule" id="programacao">
+    <div class="container">
+      <div class="schedule-header">
+        <div class="section-label reveal">Toda semana tem novidade</div>
+        <h2 class="section-title reveal reveal-delay-1">Programação da <em>Semana</em></h2>
+        <p class="schedule-subtitle reveal reveal-delay-2">Cada dia uma experiência diferente para você aproveitar</p>
+      </div>
+      <div class="schedule-grid">
+        <div class="schedule-card reveal">
+          <div class="schedule-card-img">
+            <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Terça a Quinta" loading="lazy">
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-day">Terça a Quinta</div>
+            <h3 class="schedule-title">Jantar Autoral</h3>
+            <p class="schedule-desc">Cardápio completo com entradas, massas, carnes e sobremesas assinadas pelo Chef Ricardo Vagner.</p>
+          </div>
+        </div>
+        <div class="schedule-card reveal reveal-delay-1">
+          <div class="schedule-card-img">
+            <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png" alt="Sexta e Sábado" loading="lazy">
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-day">Sexta e Sábado</div>
+            <h3 class="schedule-title">Noite Especial</h3>
+            <p class="schedule-desc">Experiência gastronômica completa com ambiente intimista e opções especiais do Chef.</p>
+          </div>
+        </div>
+        <div class="schedule-card reveal reveal-delay-2">
+          <div class="schedule-card-img">
+            <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png" alt="Domingo" loading="lazy">
+          </div>
+          <div class="schedule-card-body">
+            <div class="schedule-day">Domingo</div>
+            <h3 class="schedule-title">Almoço em Família</h3>
+            <p class="schedule-desc">Um almoço especial para reunir a família ao redor da mesa com o carinho da cozinha do Marieta.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2584,31 +2694,8 @@
           @marieta_bistro
         </a>
       </div>
-      <div class="instagram-grid">
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal">
-          <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Marieta Bistrô no Instagram" loading="lazy">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal reveal-delay-1">
-          <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png" alt="Marieta Bistrô no Instagram" loading="lazy">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal reveal-delay-2">
-          <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png" alt="Marieta Bistrô no Instagram" loading="lazy">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal reveal-delay-3">
-          <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Marieta Bistrô no Instagram" loading="lazy">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal reveal-delay-4">
-          <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Marieta Bistrô no Instagram" loading="lazy" style="object-position: right center;">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
-        <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="instagram-item reveal reveal-delay-5">
-          <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png" alt="Marieta Bistrô no Instagram" loading="lazy" style="object-position: left center;">
-          <svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-        </a>
+      <div class="instagram-grid" id="instagramGrid">
+        <!-- Carregado dinamicamente do posts.json -->
       </div>
     </div>
   </section>
@@ -2646,13 +2733,9 @@
               <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Chamar no WhatsApp
             </a>
-            <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="contact-link">
+            <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" class="contact-link" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracotta-soft)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="var(--terracotta-soft)" stroke="none"/></svg>
-              @marieta_bistro
-            </a>
-            <a href="https://marietabistro.menudino.com" target="_blank" rel="noopener" class="contact-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              Ver Cardápio Online
+              Instagram
             </a>
             <a href="https://www.google.com/maps/search/?api=1&query=Rua+General+Glic%C3%A9rio+142+Centro+Taquaritinga+SP" target="_blank" rel="noopener" class="contact-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -2723,6 +2806,21 @@
   <!-- ===== SCRIPTS ===== -->
   <!-- Dados locais (fallback caso o Gist esteja fora do ar) -->
   <script src="cardapio.js"></script>
+  <script>
+  /* INSTAGRAM-POSTS-START */
+  var instagramPosts = [
+    {"image":"imagens/instagram/post_1.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWzD2IaGhfc/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_2.jpg","postUrl":"https://www.instagram.com/marieta_bistro/reel/DWuH_iajTQ8/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_3.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWlb68zjTDP/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_4.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWjnNGAjZlF/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_5.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWekWeLjsLI/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_6.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWW2DnbGeWn/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_7.jpg","postUrl":"https://www.instagram.com/marieta_bistro/reel/DWRzPWPCYXn/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_8.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWMb64wGU_R/","alt":"Post do @marieta_bistro"},
+    {"image":"imagens/instagram/post_9.jpg","postUrl":"https://www.instagram.com/marieta_bistro/p/DWHTTqzGbLd/","alt":"Post do @marieta_bistro"}
+  ];
+  /* INSTAGRAM-POSTS-END */
+  </script>
   <script src="promocoes.js"></script>
   <script>
     // ---- Preloader (smart: based on real load, max 3s) ----
@@ -2877,6 +2975,7 @@
     function renderCardapio(cardapioData) {
       var tabsContainer = document.getElementById('menuTabs');
       var panelsContainer = document.getElementById('menuPanels');
+      var placeholderSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>';
 
       cardapioData.forEach(function(tab, tabIndex) {
         var btn = document.createElement('button');
@@ -2901,71 +3000,87 @@
         panel.className = 'menu-panel' + (tabIndex === 0 ? ' active' : '');
         panel.id = 'panel-' + tab.id;
 
-        var list = document.createElement('div');
-        list.className = 'menu-list';
-
         tab.categorias.forEach(function(cat) {
-          var catDiv = document.createElement('div');
-          catDiv.className = 'menu-list-category';
+          var catTitle = document.createElement('h3');
+          catTitle.className = 'menu-list-category-title reveal';
+          catTitle.textContent = cat.titulo;
+          panel.appendChild(catTitle);
 
-          var title = document.createElement('h3');
-          title.className = 'menu-list-category-title reveal';
-          title.textContent = cat.titulo;
-          catDiv.appendChild(title);
+          var grid = document.createElement('div');
+          grid.className = 'menu-grid';
 
-          cat.itens.forEach(function(item) {
-            var itemDiv = document.createElement('div');
-            itemDiv.className = 'menu-list-item reveal';
+          cat.itens.forEach(function(item, j) {
+            var delay = j % 4;
+            var card = document.createElement('div');
+            card.className = 'menu-item reveal' + (delay > 0 ? ' reveal-delay-' + delay : '');
+
+            var imgDiv = document.createElement('div');
+            imgDiv.className = 'menu-item-img';
+            if (item.imagem) {
+              imgDiv.innerHTML = '<img src="' + item.imagem + '" alt="' + item.nome + '" loading="lazy">';
+            } else {
+              imgDiv.innerHTML = '<div class="menu-item-img-placeholder">' + placeholderSvg + '<span>' + item.nome.split(' ')[0] + '</span></div>';
+            }
+            card.appendChild(imgDiv);
+
+            var body = document.createElement('div');
+            body.className = 'menu-item-body';
 
             var header = document.createElement('div');
-            header.className = 'menu-list-item-header';
-
-            var name = document.createElement('span');
-            name.className = 'menu-list-item-name';
-            name.textContent = item.nome;
-            header.appendChild(name);
-
+            header.className = 'menu-item-header';
+            header.innerHTML = '<span class="menu-item-name">' + item.nome + '</span>';
             if (item.preco && item.preco > 0) {
-              var price = document.createElement('span');
-              price.className = 'menu-list-item-price';
               var p = Number(item.preco);
-              price.textContent = p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',');
-              header.appendChild(price);
+              header.innerHTML += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',')) + '</span>';
             }
-
-            itemDiv.appendChild(header);
+            body.appendChild(header);
 
             if (item.desc) {
               var desc = document.createElement('p');
-              desc.className = 'menu-list-item-desc';
+              desc.className = 'menu-item-desc';
               desc.textContent = item.desc;
-              itemDiv.appendChild(desc);
+              body.appendChild(desc);
             }
 
             if (item.destaque) {
               var badge = document.createElement('span');
               badge.className = 'menu-list-item-badge';
-              badge.textContent = '✨ Favorito do Chef';
-              itemDiv.appendChild(badge);
+              badge.textContent = 'Favorito do Chef';
+              body.appendChild(badge);
             }
 
-            catDiv.appendChild(itemDiv);
+            card.appendChild(body);
+            grid.appendChild(card);
           });
+
+          panel.appendChild(grid);
 
           if (cat.nota) {
             var nota = document.createElement('p');
             nota.className = 'menu-list-note reveal';
             nota.textContent = cat.nota;
-            catDiv.appendChild(nota);
+            panel.appendChild(nota);
           }
-
-          list.appendChild(catDiv);
         });
 
-        panel.appendChild(list);
         panelsContainer.appendChild(panel);
       });
     }
+
+    // ---- Instagram Feed ----
+    (function() {
+      var grid = document.getElementById('instagramGrid');
+      if (!grid || typeof instagramPosts === 'undefined' || !instagramPosts.length) return;
+      var igIcon = '<svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>';
+      var html = '';
+      instagramPosts.forEach(function(post, i) {
+        html += '<a href="' + post.postUrl + '" target="_blank" rel="noopener" class="instagram-item" style="opacity:1;">';
+        html += '<img src="' + post.image + '" alt="' + (post.alt || '').replace(/"/g, '&quot;') + '">';
+        html += igIcon;
+        html += '</a>';
+      });
+      grid.innerHTML = html;
+    })();
 
     // ---- Lightbox ----
 
