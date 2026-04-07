@@ -247,7 +247,7 @@
       animation: preloaderFade 1.2s var(--ease-out) 0.2s forwards;
     }
     .preloader-logo-img {
-      height: 160px;
+      height: 120px;
       width: auto;
     }
     .preloader-bar {
@@ -482,7 +482,7 @@
       align-items: center;
     }
     .header-logo-img {
-      height: 220px;
+      height: 75px;
       width: auto;
     }
 
@@ -1179,6 +1179,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: zoom-in;
     }
     .menu-item-placeholder {
       width: 100%;
@@ -1262,6 +1263,69 @@
       border-radius: 12px;
       letter-spacing: 0.05em;
     }
+    /* Lightbox zoom */
+    .menu-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s var(--ease-out), visibility 0.3s;
+      cursor: zoom-out;
+      padding: 24px;
+    }
+    .menu-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .menu-lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 12px;
+      object-fit: contain;
+      transform: scale(0.9);
+      transition: transform 0.3s var(--ease-out);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .menu-lightbox.active img {
+      transform: scale(1);
+    }
+    .menu-lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--cream);
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .menu-lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .menu-lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
     .menu-note {
       text-align: center;
       margin-top: 48px;
@@ -2305,6 +2369,12 @@
       </div>
       <p class="menu-note reveal">* Cardápio sujeito a alterações conforme disponibilidade de ingredientes sazonais</p>
     </div>
+    <!-- Lightbox para zoom das fotos -->
+    <div class="menu-lightbox" id="menuLightbox">
+      <button class="menu-lightbox-close" aria-label="Fechar">&times;</button>
+      <img src="" alt="">
+      <div class="menu-lightbox-caption"></div>
+    </div>
   </section>
 
   <!-- ===== GALERIA ===== -->
@@ -2886,9 +2956,9 @@
             panelsHtml += '<div class="menu-item-content">';
             panelsHtml += '<div class="menu-item-header">';
             panelsHtml += '<span class="menu-item-name">' + item.nome + '</span>';
-            if (item.preco && item.preco > 0) {
+            if (item.preco !== undefined && item.preco !== null && item.preco !== '' && Number(item.preco) > 0) {
               var p = Number(item.preco);
-              panelsHtml += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p.toFixed(0) : p.toFixed(2).replace('.', ',')) + '</span>';
+              panelsHtml += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p + ',00' : p.toFixed(2).replace('.', ',')) + '</span>';
             }
             panelsHtml += '</div>';
 
@@ -2926,6 +2996,38 @@
         });
       });
     }
+
+    // ---- Lightbox zoom cardápio ----
+    (function() {
+      var lightbox = document.getElementById('menuLightbox');
+      if (!lightbox) return;
+      var lbImg = lightbox.querySelector('img');
+      var lbCaption = lightbox.querySelector('.menu-lightbox-caption');
+      var lbClose = lightbox.querySelector('.menu-lightbox-close');
+
+      document.getElementById('menuPanels').addEventListener('click', function(e) {
+        var img = e.target.closest('.menu-item-image img');
+        if (!img) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCaption.textContent = img.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+      });
+    })();
 
     // ---- Instagram Feed ----
     (function() {
