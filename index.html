@@ -2026,12 +2026,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
       position: relative;
       z-index: 2;
     }
     .footer-copy {
       font-size: 0.75rem;
       color: var(--text-muted);
+    }
+    .footer-dev {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .footer-dev a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-dev a:hover {
+      color: var(--gold);
     }
     .footer-social {
       display: flex;
@@ -2742,6 +2756,7 @@
       </div>
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Marieta Bistrô. Todos os direitos reservados.</p>
+        <p class="footer-dev"><a href="https://julianoanselmo.github.io/portifolio/" target="_blank" rel="noopener">Desenvolvido por Juliano Anselmo</a></p>
         <div class="footer-social">
           <a href="https://www.instagram.com/marieta_bistro" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-body)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="var(--text-body)" stroke="none"/></svg>
