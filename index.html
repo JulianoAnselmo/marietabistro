@@ -1127,7 +1127,11 @@
       flex-wrap: wrap;
       position: relative;
       z-index: 2;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
     }
+    .menu-tabs::-webkit-scrollbar { display: none; }
     .menu-tab {
       padding: 10px 24px;
       font-family: var(--font-body);
@@ -1271,13 +1275,15 @@
     /* ── Category filter nav ── */
     .menu-cat-nav {
       display: flex;
-      justify-content: center;
       gap: 8px;
-      flex-wrap: wrap;
       margin-bottom: 44px;
       position: relative;
       z-index: 2;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
     }
+    .menu-cat-nav::-webkit-scrollbar { display: none; }
     .menu-cat-btn {
       padding: 7px 18px;
       font-family: var(--font-body);
@@ -3200,9 +3206,9 @@
         // Category filter nav (only if more than 1 category)
         if (activeCats.length > 1) {
           panelsHtml += '<div class="menu-cat-nav">';
-          panelsHtml += '<button class="menu-cat-btn active" data-cat="todos">Todos</button>';
+          panelsHtml += '<button class="menu-cat-btn" data-cat="todos">Todos</button>';
           activeCats.forEach(function(cat, ci) {
-            panelsHtml += '<button class="menu-cat-btn" data-cat="' + ci + '">' + cat.titulo + '</button>';
+            panelsHtml += '<button class="menu-cat-btn' + (ci === 0 ? ' active' : '') + '" data-cat="' + ci + '">' + cat.titulo + '</button>';
           });
           panelsHtml += '</div>';
         }
@@ -3283,6 +3289,12 @@
         });
       }
 
+      // Apply initial filter: show only first category on each panel
+      panelsContainer.querySelectorAll('.menu-panel').forEach(function(panel) {
+        var nav = panel.querySelector('.menu-cat-nav');
+        if (nav) filterCategories(panel, '0');
+      });
+
       // Category filter button handlers
       panelsContainer.querySelectorAll('.menu-cat-nav').forEach(function(nav) {
         nav.querySelectorAll('.menu-cat-btn').forEach(function(btn) {
@@ -3308,9 +3320,9 @@
             var nav = panel.querySelector('.menu-cat-nav');
             if (nav) {
               nav.querySelectorAll('.menu-cat-btn').forEach(function(b) { b.classList.remove('active'); });
-              var todosBtn = nav.querySelector('[data-cat="todos"]');
-              if (todosBtn) todosBtn.classList.add('active');
-              panel.querySelectorAll('.menu-category').forEach(function(sec) { sec.style.display = ''; });
+              var firstCatBtn = nav.querySelector('[data-cat="0"]');
+              if (firstCatBtn) firstCatBtn.classList.add('active');
+              filterCategories(panel, '0');
             }
             panel.querySelectorAll('.reveal').forEach(function(el) {
               el.classList.remove('visible');
