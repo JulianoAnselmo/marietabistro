@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /dist/
+Disallow: /docs/
 
 Sitemap: https://marietabistro.com.br/sitemap.xml
