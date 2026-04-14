@@ -1275,15 +1275,13 @@
     /* ── Category filter nav ── */
     .menu-cat-nav {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 44px;
       position: relative;
       z-index: 2;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
     }
-    .menu-cat-nav::-webkit-scrollbar { display: none; }
     .menu-cat-btn {
       padding: 7px 18px;
       font-family: var(--font-body);
@@ -1296,6 +1294,8 @@
       background: transparent;
       cursor: pointer;
       transition: all 0.25s var(--ease-out);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .menu-cat-btn:hover {
       border-color: rgba(212, 175, 55, 0.6);
@@ -2272,7 +2272,10 @@
       .menu-category-header { margin-bottom: 24px; }
       .menu-category-title { font-size: 0.9rem; letter-spacing: 0.1em; gap: 14px; }
       .menu-category-title::before, .menu-category-title::after { max-width: 48px; }
-      .menu-cat-nav { gap: 6px; margin-bottom: 32px; }
+      .menu-cat-nav { gap: 6px; margin-bottom: 32px; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 6px; scrollbar-width: none; }
+      .menu-cat-nav::-webkit-scrollbar { display: none; }
+      .menu-tabs { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 6px; scrollbar-width: none; }
+      .menu-tabs::-webkit-scrollbar { display: none; }
       .menu-cat-btn { padding: 6px 14px; font-size: 0.74rem; }
 
       .features-grid { grid-template-columns: 1fr; }
