@@ -1262,6 +1262,47 @@
       background: var(--wine);
       color: var(--cream);
     }
+    /* ── Category sections ── */
+    .menu-category {
+      margin-bottom: 56px;
+    }
+    .menu-category:last-child {
+      margin-bottom: 0;
+    }
+    .menu-category-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .menu-category-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .menu-category-title::before,
+    .menu-category-title::after {
+      content: '';
+      flex: 1;
+      max-width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,175,55,0.4));
+    }
+    .menu-category-title::after {
+      background: linear-gradient(to left, transparent, rgba(212,175,55,0.4));
+    }
+    .menu-category-nota {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
     .menu-item-destaque {
       border: 1px solid rgba(var(--gold-rgb, 212, 175, 55), 0.35);
     }
@@ -2147,6 +2188,7 @@
       .about-timeline { padding-left: 40px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .menu-grid { grid-template-columns: 1fr; }
+      .menu-category { margin-bottom: 48px; }
       .events-grid { grid-template-columns: repeat(2, 1fr); }
       .schedule-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-carousel { max-width: 100%; }
@@ -2178,6 +2220,10 @@
       .menu-grid { grid-template-columns: 1fr; }
       .menu-item-image { width: 80px; height: 80px; }
       .menu-item { padding: 16px; gap: 14px; }
+      .menu-category { margin-bottom: 40px; }
+      .menu-category-header { margin-bottom: 24px; }
+      .menu-category-title { font-size: 0.9rem; letter-spacing: 0.1em; gap: 14px; }
+      .menu-category-title::before, .menu-category-title::after { max-width: 48px; }
 
       .features-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: 1fr; }
@@ -3082,22 +3128,33 @@
       });
       tabsContainer.innerHTML = tabsHtml;
 
+      function isDestaque(item) {
+        return item.destaque === true || (Array.isArray(item.tags) && item.tags.indexOf('destaque') !== -1);
+      }
+
       // Build panels
       var panelsHtml = '';
       cardapioData.forEach(function(tab, i) {
         panelsHtml += '<div class="menu-panel' + (i === 0 ? ' active' : '') + '" data-panel="' + tab.id + '">';
-        panelsHtml += '<div class="menu-grid">';
-
-        function isDestaque(item) {
-          return item.destaque === true || (Array.isArray(item.tags) && item.tags.indexOf('destaque') !== -1);
-        }
 
         var itemCount = 0;
         tab.categorias.forEach(function(cat) {
           if (cat.ativo === false) return;
-          // Sort: destaques first, then original order
           var itens = cat.itens.filter(function(item) { return item.ativo !== false; });
+          if (itens.length === 0) return;
+
+          // Sort: destaques first, maintain relative order
           itens.sort(function(a, b) { return (isDestaque(b) ? 1 : 0) - (isDestaque(a) ? 1 : 0); });
+
+          // Category section
+          panelsHtml += '<div class="menu-category">';
+          panelsHtml += '<div class="menu-category-header">';
+          panelsHtml += '<h3 class="menu-category-title">' + cat.titulo + '</h3>';
+          if (cat.nota) {
+            panelsHtml += '<p class="menu-category-nota">' + cat.nota + '</p>';
+          }
+          panelsHtml += '</div>';
+          panelsHtml += '<div class="menu-grid">';
 
           itens.forEach(function(item) {
             var delay = itemCount % 4;
@@ -3128,15 +3185,17 @@
             }
 
             if (destaqueItem) {
-              panelsHtml += '<span class="menu-list-item-badge menu-badge-destaque">⭐ Destaque</span>';
+              panelsHtml += '<span class="menu-badge-destaque">⭐ Destaque</span>';
             }
 
             panelsHtml += '</div></div>';
             itemCount++;
           });
+
+          panelsHtml += '</div></div>'; // .menu-grid + .menu-category
         });
 
-        panelsHtml += '</div></div>';
+        panelsHtml += '</div>'; // .menu-panel
       });
       panelsContainer.innerHTML = panelsHtml;
 
