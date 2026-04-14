@@ -1262,6 +1262,39 @@
       background: var(--wine);
       color: var(--cream);
     }
+    /* ── Category filter nav ── */
+    .menu-cat-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+      position: relative;
+      z-index: 2;
+    }
+    .menu-cat-btn {
+      padding: 7px 18px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      border-radius: 50px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-out);
+    }
+    .menu-cat-btn:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      color: var(--gold);
+    }
+    .menu-cat-btn.active {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
     /* ── Category sections ── */
     .menu-category {
       margin-bottom: 56px;
@@ -2224,6 +2257,8 @@
       .menu-category-header { margin-bottom: 24px; }
       .menu-category-title { font-size: 0.9rem; letter-spacing: 0.1em; gap: 14px; }
       .menu-category-title::before, .menu-category-title::after { max-width: 48px; }
+      .menu-cat-nav { gap: 6px; margin-bottom: 32px; }
+      .menu-cat-btn { padding: 6px 14px; font-size: 0.74rem; }
 
       .features-grid { grid-template-columns: 1fr; }
       .events-grid { grid-template-columns: 1fr; }
@@ -3137,17 +3172,29 @@
       cardapioData.forEach(function(tab, i) {
         panelsHtml += '<div class="menu-panel' + (i === 0 ? ' active' : '') + '" data-panel="' + tab.id + '">';
 
-        var itemCount = 0;
-        tab.categorias.forEach(function(cat) {
-          if (cat.ativo === false) return;
-          var itens = cat.itens.filter(function(item) { return item.ativo !== false; });
-          if (itens.length === 0) return;
+        // Collect active categories for this tab
+        var activeCats = tab.categorias.filter(function(cat) {
+          if (cat.ativo === false) return false;
+          return cat.itens.some(function(item) { return item.ativo !== false; });
+        });
 
-          // Sort: destaques first, maintain relative order
+        // Category filter nav (only if more than 1 category)
+        if (activeCats.length > 1) {
+          panelsHtml += '<div class="menu-cat-nav">';
+          panelsHtml += '<button class="menu-cat-btn active" data-cat="todos">Todos</button>';
+          activeCats.forEach(function(cat, ci) {
+            panelsHtml += '<button class="menu-cat-btn" data-cat="' + ci + '">' + cat.titulo + '</button>';
+          });
+          panelsHtml += '</div>';
+        }
+
+        // Category sections
+        var itemCount = 0;
+        activeCats.forEach(function(cat, ci) {
+          var itens = cat.itens.filter(function(item) { return item.ativo !== false; });
           itens.sort(function(a, b) { return (isDestaque(b) ? 1 : 0) - (isDestaque(a) ? 1 : 0); });
 
-          // Category section
-          panelsHtml += '<div class="menu-category">';
+          panelsHtml += '<div class="menu-category" data-cat-index="' + ci + '">';
           panelsHtml += '<div class="menu-category-header">';
           panelsHtml += '<h3 class="menu-category-title">' + cat.titulo + '</h3>';
           if (cat.nota) {
@@ -3161,7 +3208,6 @@
             var destaqueItem = isDestaque(item);
             panelsHtml += '<div class="menu-item reveal' + (delay > 0 ? ' reveal-delay-' + delay : '') + (destaqueItem ? ' menu-item-destaque' : '') + '">';
 
-            // Image / placeholder
             panelsHtml += '<div class="menu-item-image">';
             if (item.imagem) {
               panelsHtml += '<img src="' + item.imagem + '" alt="' + item.nome + '" loading="lazy">';
@@ -3170,7 +3216,6 @@
             }
             panelsHtml += '</div>';
 
-            // Content
             panelsHtml += '<div class="menu-item-content">';
             panelsHtml += '<div class="menu-item-header">';
             panelsHtml += '<span class="menu-item-name">' + item.nome + '</span>';
@@ -3179,15 +3224,8 @@
               panelsHtml += '<span class="menu-item-price">R$ ' + (p % 1 === 0 ? p + ',00' : p.toFixed(2).replace('.', ',')) + '</span>';
             }
             panelsHtml += '</div>';
-
-            if (item.desc) {
-              panelsHtml += '<p class="menu-item-desc">' + item.desc + '</p>';
-            }
-
-            if (destaqueItem) {
-              panelsHtml += '<span class="menu-badge-destaque">⭐ Destaque</span>';
-            }
-
+            if (item.desc) panelsHtml += '<p class="menu-item-desc">' + item.desc + '</p>';
+            if (destaqueItem) panelsHtml += '<span class="menu-badge-destaque">⭐ Destaque</span>';
             panelsHtml += '</div></div>';
             itemCount++;
           });
@@ -3199,6 +3237,34 @@
       });
       panelsContainer.innerHTML = panelsHtml;
 
+      // Helper: filter categories within a panel
+      function filterCategories(panel, catIndex) {
+        panel.querySelectorAll('.menu-category').forEach(function(sec) {
+          if (catIndex === 'todos' || sec.dataset.catIndex === catIndex) {
+            sec.style.display = '';
+          } else {
+            sec.style.display = 'none';
+          }
+        });
+        // Re-trigger reveal on visible items
+        panel.querySelectorAll('.menu-category:not([style*="none"]) .reveal').forEach(function(el) {
+          el.classList.remove('visible');
+          setTimeout(function() { el.classList.add('visible'); }, 50);
+        });
+      }
+
+      // Category filter button handlers
+      panelsContainer.querySelectorAll('.menu-cat-nav').forEach(function(nav) {
+        nav.querySelectorAll('.menu-cat-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            nav.querySelectorAll('.menu-cat-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var panel = btn.closest('.menu-panel');
+            filterCategories(panel, btn.dataset.cat);
+          });
+        });
+      });
+
       // Tab click handlers
       document.querySelectorAll('.menu-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
@@ -3208,6 +3274,14 @@
           var panel = document.querySelector('[data-panel="' + tab.dataset.tab + '"]');
           if (panel) {
             panel.classList.add('active');
+            // Reset category filter to "Todos"
+            var nav = panel.querySelector('.menu-cat-nav');
+            if (nav) {
+              nav.querySelectorAll('.menu-cat-btn').forEach(function(b) { b.classList.remove('active'); });
+              var todosBtn = nav.querySelector('[data-cat="todos"]');
+              if (todosBtn) todosBtn.classList.add('active');
+              panel.querySelectorAll('.menu-category').forEach(function(sec) { sec.style.display = ''; });
+            }
             panel.querySelectorAll('.reveal').forEach(function(el) {
               el.classList.remove('visible');
               setTimeout(function() { el.classList.add('visible'); }, 50);
