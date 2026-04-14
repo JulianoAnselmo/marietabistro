@@ -1635,8 +1635,11 @@
     .schedule-card-img img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center;
       transition: transform 0.6s var(--ease-out);
     }
+    .schedule-card-img img.pos-top    { object-position: center top; }
+    .schedule-card-img img.pos-center { object-position: center center; }
     .schedule-card:hover .schedule-card-img img {
       transform: scale(1.06);
     }
@@ -2593,7 +2596,7 @@
       <div class="schedule-grid">
         <div class="schedule-card reveal">
           <div class="schedule-card-img">
-            <img src="imagens/jantar-autoral.jpg" alt="Terça a Quinta" loading="lazy">
+            <img src="imagens/jantar-autoral.jpg" alt="Terça a Quinta" loading="lazy" class="pos-top">
           </div>
           <div class="schedule-card-body">
             <div class="schedule-day">Terça a Quinta</div>
@@ -2603,7 +2606,7 @@
         </div>
         <div class="schedule-card reveal reveal-delay-1">
           <div class="schedule-card-img">
-            <img src="imagens/fachada-iluminada.jpg" alt="Sexta e Sábado" loading="lazy">
+            <img src="imagens/salao-principal.jpg" alt="Sexta e Sábado" loading="lazy" class="pos-center">
           </div>
           <div class="schedule-card-body">
             <div class="schedule-day">Sexta e Sábado</div>
@@ -2613,7 +2616,7 @@
         </div>
         <div class="schedule-card reveal reveal-delay-2">
           <div class="schedule-card-img">
-            <img src="imagens/almoco-familia.jpg" alt="Domingo" loading="lazy">
+            <img src="imagens/almoco-familia.jpg" alt="Domingo" loading="lazy" class="pos-top">
           </div>
           <div class="schedule-card-body">
             <div class="schedule-day">Domingo</div>
