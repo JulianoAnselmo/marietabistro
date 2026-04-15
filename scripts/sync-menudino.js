@@ -86,32 +86,89 @@ function browserHeaders(token) {
     'Origin': 'https://' + MENUDINO_HOST,
     'Referer': MENUDINO_HOME,
     'Accept': 'application/json, text/plain, */*',
-    'Accept-Language': 'pt-BR'
+    'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'Accept-Encoding': 'identity',
+    'sec-ch-ua': '"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'cross-site'
   };
   if (token) h['Authorization'] = 'Bearer ' + token;
   return h;
 }
 
-// --- 1. Autenticação: obter app-access-token via HEAD da home do Menudino ---
+// --- 1. Autenticação: obter app-access-token via GET na home do Menudino ---
+
+// Headers que imitam um Chrome real — Cloudflare do Menudino bloqueia requests
+// que não parecem browser (sobretudo de IPs de datacenter como GitHub Actions).
+function browserLikeHomeHeaders() {
+  return {
+    'User-Agent': USER_AGENT,
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+    'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+    'Accept-Encoding': 'identity', // forçar plain — evita ter que descomprimir gzip
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Upgrade-Insecure-Requests': '1',
+    'sec-ch-ua': '"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1'
+  };
+}
+
+function tryExtractToken(res) {
+  var token = res.headers['app-access-token'];
+  if (token) return token;
+  // fallback: tenta extrair do set-cookie (URL-encoded JWT)
+  var cookies = res.headers['set-cookie'] || [];
+  for (var i = 0; i < cookies.length; i++) {
+    var m = cookies[i].match(/^app-access-token=([^;]+)/);
+    if (m) return decodeURIComponent(m[1]);
+  }
+  return null;
+}
 
 function fetchAppAccessToken() {
   return httpsRequest({
     method: 'GET',
     hostname: MENUDINO_HOST,
     path: '/',
-    headers: { 'User-Agent': USER_AGENT, 'Accept': 'text/html' }
+    headers: browserLikeHomeHeaders()
   }).then(function(res) {
-    var token = res.headers['app-access-token'];
-    if (!token) {
-      // fallback: tenta extrair do set-cookie (URL-encoded JWT)
-      var cookies = res.headers['set-cookie'] || [];
-      for (var i = 0; i < cookies.length; i++) {
-        var m = cookies[i].match(/^app-access-token=([^;]+)/);
-        if (m) { token = decodeURIComponent(m[1]); break; }
-      }
+    var token = tryExtractToken(res);
+    if (token) return token;
+
+    // Falhou — emite log de diagnóstico detalhado
+    console.error('');
+    console.error('=== DIAGNÓSTICO fetchAppAccessToken ===');
+    console.error('HTTP status:', res.statusCode);
+    console.error('Headers recebidos:');
+    Object.keys(res.headers).forEach(function(k) {
+      var v = res.headers[k];
+      if (Array.isArray(v)) v = v.join(' | ');
+      // trunca valores muito longos
+      if (typeof v === 'string' && v.length > 300) v = v.slice(0, 300) + '... (truncado)';
+      console.error('  ' + k + ': ' + v);
+    });
+    console.error('Primeiros 500 chars do body:');
+    console.error(res.body.slice(0, 500));
+    console.error('=======================================');
+    console.error('');
+
+    // Detecta challenge de Cloudflare
+    if (res.body.indexOf('Attention Required') !== -1 ||
+        res.body.indexOf('cf-browser-verification') !== -1 ||
+        res.body.indexOf('__cf_chl_') !== -1) {
+      throw new Error('Cloudflare está bloqueando o request com challenge/bot-detection. O IP do runner provavelmente foi classificado como bot.');
     }
-    if (!token) throw new Error('Não foi possível obter app-access-token do Menudino');
-    return token;
+
+    throw new Error('Não foi possível obter app-access-token do Menudino (HTTP ' + res.statusCode + ')');
   });
 }
 
