@@ -134,42 +134,114 @@ function tryExtractToken(res) {
   return null;
 }
 
-function fetchAppAccessToken() {
-  return httpsRequest({
+// Fallback: usa Puppeteer+stealth quando Cloudflare bloqueia https nativo.
+// Só é importado dinamicamente — em runs locais que funcionam com https,
+// puppeteer nem precisa estar instalado.
+async function fetchAppAccessTokenViaBrowser() {
+  console.log('    (fallback) Tentando via browser headless com Puppeteer + stealth...');
+  var puppeteer, StealthPlugin;
+  try {
+    puppeteer = require('puppeteer-extra');
+    StealthPlugin = require('puppeteer-extra-plugin-stealth');
+  } catch (e) {
+    throw new Error('Puppeteer não instalado. Rode: npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth');
+  }
+  puppeteer.use(StealthPlugin());
+
+  var browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+  });
+
+  try {
+    var page = await browser.newPage();
+    await page.setUserAgent(USER_AGENT);
+    await page.setExtraHTTPHeaders({
+      'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7'
+    });
+
+    // Intercepta o header response da navegação principal
+    var tokenFromHeader = null;
+    page.on('response', function(resp) {
+      try {
+        if (resp.url() === MENUDINO_HOME || resp.url() === MENUDINO_HOME.replace(/\/$/, '')) {
+          var h = resp.headers();
+          if (h['app-access-token'] && !tokenFromHeader) {
+            tokenFromHeader = h['app-access-token'];
+          }
+        }
+      } catch (e) {}
+    });
+
+    await page.goto(MENUDINO_HOME, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Dá um tempinho pro Cloudflare processar e pro JS hydratar
+    await new Promise(function(r) { setTimeout(r, 2000); });
+
+    var token = tokenFromHeader;
+
+    if (!token) {
+      // Tenta cookies
+      var cookies = await page.cookies();
+      var tokenCookie = cookies.find(function(c) { return c.name === 'app-access-token'; });
+      if (tokenCookie) token = decodeURIComponent(tokenCookie.value);
+    }
+
+    if (!token) {
+      // Último recurso: se o cookie vem URL-encoded e passou pelo fetch, recupera do header atual
+      var html = await page.content();
+      var m = html.match(/app-access-token["']?\s*[:=]\s*["']?(eyJ[A-Za-z0-9._-]+)/);
+      if (m) token = m[1];
+    }
+
+    if (!token) throw new Error('Token não encontrado nem no header, nem em cookies, nem no HTML após navegação via Puppeteer');
+    return token;
+  } finally {
+    await browser.close();
+  }
+}
+
+async function fetchAppAccessToken() {
+  // 1ª tentativa: https nativo (rápido, funciona local)
+  var res = await httpsRequest({
     method: 'GET',
     hostname: MENUDINO_HOST,
     path: '/',
     headers: browserLikeHomeHeaders()
-  }).then(function(res) {
-    var token = tryExtractToken(res);
-    if (token) return token;
+  });
+  var token = tryExtractToken(res);
+  if (token) return token;
 
-    // Falhou — emite log de diagnóstico detalhado
+  // Log de diagnóstico
+  console.error('    (https nativo falhou — HTTP ' + res.statusCode + ')');
+  var bloqueadoPorCloudflare = res.body.indexOf('Attention Required') !== -1 ||
+                                res.body.indexOf('cf-browser-verification') !== -1 ||
+                                res.body.indexOf('__cf_chl_') !== -1;
+  if (bloqueadoPorCloudflare) {
+    console.error('    Cloudflare bloqueou — tentando fallback Puppeteer...');
+  }
+
+  // 2ª tentativa: Puppeteer headless
+  try {
+    var tokenBrowser = await fetchAppAccessTokenViaBrowser();
+    return tokenBrowser;
+  } catch (e) {
+    // Dump diagnóstico completo pra ajudar debug
     console.error('');
     console.error('=== DIAGNÓSTICO fetchAppAccessToken ===');
-    console.error('HTTP status:', res.statusCode);
-    console.error('Headers recebidos:');
+    console.error('HTTP status (https): ', res.statusCode);
+    console.error('Headers recebidos (https):');
     Object.keys(res.headers).forEach(function(k) {
       var v = res.headers[k];
       if (Array.isArray(v)) v = v.join(' | ');
-      // trunca valores muito longos
       if (typeof v === 'string' && v.length > 300) v = v.slice(0, 300) + '... (truncado)';
       console.error('  ' + k + ': ' + v);
     });
-    console.error('Primeiros 500 chars do body:');
+    console.error('Primeiros 500 chars do body (https):');
     console.error(res.body.slice(0, 500));
+    console.error('Erro Puppeteer:', e.message);
     console.error('=======================================');
-    console.error('');
-
-    // Detecta challenge de Cloudflare
-    if (res.body.indexOf('Attention Required') !== -1 ||
-        res.body.indexOf('cf-browser-verification') !== -1 ||
-        res.body.indexOf('__cf_chl_') !== -1) {
-      throw new Error('Cloudflare está bloqueando o request com challenge/bot-detection. O IP do runner provavelmente foi classificado como bot.');
-    }
-
-    throw new Error('Não foi possível obter app-access-token do Menudino (HTTP ' + res.statusCode + ')');
-  });
+    throw new Error('Não foi possível obter app-access-token do Menudino (https + puppeteer falharam). Ver log acima.');
+  }
 }
 
 // --- 2. Fetch de categorias ---

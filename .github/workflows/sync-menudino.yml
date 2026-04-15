@@ -22,6 +22,9 @@ jobs:
       - name: Instalar dependencias
         run: npm install --omit=dev
 
+      - name: Instalar puppeteer (fallback anti-Cloudflare)
+        run: npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth --no-save
+
       - name: Escrever serviceAccountProd.json a partir do secret
         env:
           FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
