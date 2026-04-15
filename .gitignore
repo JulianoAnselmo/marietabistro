@@ -4,3 +4,4 @@ dist/
 node_modules/
 serviceAccountProd.json
 serviceAccountDev.json
+scripts/sync-menudino.log

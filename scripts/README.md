@@ -2,6 +2,23 @@
 
 Scripts para sincronizar o cardápio do Marieta a partir do [Menudino](https://marietabistro.menudino.com/) para o Firestore do cardapio-admin (projeto `cardapio-admin-prod`). O site do Marieta já lê desse Firestore, então não é preciso mexer no código do site.
 
+## 🎯 Modo recomendado: botão no cardapio-admin
+
+A forma mais fácil é usar o botão **"Sincronizar Menudino"** que está na barra de ações do editor de cardápio do cardapio-admin (`/restaurante/marieta-bistro/cardapio`):
+
+1. Abre o Marieta no cardapio-admin
+2. Abre [https://marietabistro.menudino.com/](https://marietabistro.menudino.com/) em outra aba
+3. Pressiona `F12` → aba Console → cola `copy(document.cookie)` → Enter
+4. Volta no cardapio-admin, clica em **Sincronizar Menudino**, cola o cookie no modal e clica em Sincronizar
+
+Pronto. Não precisa rodar script local, não precisa de serviços, não precisa agendamento — roda no browser do navegador do admin (IP residencial) em ~10 segundos.
+
+> **Por que não posso rodar isso num servidor?** O Cloudflare do Menudino tem Bot Fight Mode que rejeita qualquer IP de datacenter (GitHub Actions, Cloud Functions, Cloudflare Workers, etc) com HTTP 403, mesmo usando Puppeteer + stealth plugin. Só passa de IP residencial.
+
+## Modo alternativo (script local)
+
+Os scripts abaixo existem para casos em que você precise rodar fora do browser (debugging, automação local com Task Scheduler, etc). Fazem exatamente a mesma coisa que o botão no admin, mas a partir do terminal.
+
 ## Arquivos
 
 | Arquivo | Função |
@@ -36,39 +53,37 @@ npm run cleanup:inactive
 npm run cleanup:inactive -- --apply
 ```
 
-## Rodar agendado via GitHub Actions
+## Rodar agendado via Windows Task Scheduler
 
-O workflow [`.github/workflows/sync-menudino.yml`](../.github/workflows/sync-menudino.yml) roda o sync automaticamente todo dia às ~01h17 (horário de Brasília), e também pode ser disparado manualmente pelo GitHub.
+> **Por que não GitHub Actions?** O Cloudflare do Menudino tem Bot Fight Mode que rejeita qualquer request vinda de IPs de datacenter (GitHub Actions, Azure, AWS, Cloudflare Workers, etc) com HTTP 403 "Attention Required", mesmo com Puppeteer + plugin stealth. O único jeito é rodar o script numa máquina com IP residencial — exatamente o mesmo padrão que o pizzakid usa.
 
-### Configurar o secret `FIREBASE_SERVICE_ACCOUNT_PROD`
+O arquivo [`sync-menudino.bat`](sync-menudino.bat) é um wrapper que o Task Scheduler pode chamar diretamente. Ele muda pro diretório certo, roda `npm run sync:menudino` e acrescenta o output num arquivo de log (`scripts/sync-menudino.log`, ignorado pelo git).
 
-Só precisa fazer uma vez. O workflow lê o JSON do service account de um GitHub Secret.
+### Passos para agendar (só faz uma vez)
 
-1. Abrir o `serviceAccountProd.json` no bloco de notas e copiar **todo o conteúdo** (é um JSON com `private_key`, `client_email`, etc).
+1. Abrir o **Task Scheduler** do Windows (`Win+R` → `taskschd.msc`).
+2. Menu lateral direito → **`Create Basic Task...`**.
+3. Na tela:
+   - **Name**: `Sync cardapio Marieta Menudino`
+   - **Description**: `Puxa cardapio do Menudino e grava no Firestore`
+   - **Trigger**: `Daily` → hora que preferir (ex: 03:30)
+   - **Action**: `Start a program`
+   - **Program/script**: `C:\dev\clientes\marieta\scripts\sync-menudino.bat`
+   - **Add arguments**: (deixe em branco)
+   - **Start in**: (deixe em branco — o `.bat` faz `cd` sozinho)
+4. Finalizar. A task aparece na lista `Task Scheduler Library`.
 
-2. Abrir o repositório no GitHub → `Settings` → `Secrets and variables` → `Actions` → botão **`New repository secret`**.
+### Testar que funciona
 
-3. Preencher:
-   - **Name:** `FIREBASE_SERVICE_ACCOUNT_PROD`
-   - **Secret:** colar o JSON inteiro (começando em `{` e terminando em `}`)
+- **Manualmente via Task Scheduler**: botão direito na task → `Run`.
+- **Manualmente via terminal**: `scripts\sync-menudino.bat` na raiz do projeto marieta.
+- **Ver log**: `type scripts\sync-menudino.log` (histórico de todas execuções).
 
-4. Clicar `Add secret`.
+### Requisitos
 
-### Rodar manualmente pelo GitHub
-
-1. Repositório no GitHub → aba `Actions`.
-2. Na lista da esquerda, selecionar `Sync cardapio Menudino`.
-3. Botão **`Run workflow`** à direita → `Run workflow` de novo (confirmar).
-4. Ver o log em tempo real.
-
-### Mudar a frequência
-
-Editar a linha `cron: '17 4 * * *'` em [`sync-menudino.yml`](../.github/workflows/sync-menudino.yml). O formato é `min hour dayOfMonth month dayOfWeek` em UTC.
-
-Exemplos:
-- `'17 4 * * *'` → diariamente às 04:17 UTC (~01:17 BRT)
-- `'17 4 * * 1'` → toda segunda-feira às 04:17 UTC
-- `'0 */6 * * *'` → a cada 6 horas
+- PC ligado na hora do trigger (o Task Scheduler do Windows tem opção "Run task as soon as possible after a scheduled start is missed" para executar mesmo se o PC estava desligado — marque essa opção na aba `Settings` da task).
+- Service account `serviceAccountProd.json` na raiz do projeto marieta.
+- Node.js 18+ no PATH (o `.bat` usa `npm run`).
 
 ## Como funciona a sincronização
 
