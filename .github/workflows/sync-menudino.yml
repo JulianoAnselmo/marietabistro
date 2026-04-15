@@ -1,0 +1,41 @@
+name: Sync cardapio Menudino
+
+on:
+  schedule:
+    # Diariamente as 04:17 UTC (~01:17 horario de Brasilia)
+    - cron: '17 4 * * *'
+  workflow_dispatch: # Permite rodar manualmente pelo GitHub
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm install --omit=dev
+
+      - name: Escrever serviceAccountProd.json a partir do secret
+        env:
+          FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT_PROD" ]; then
+            echo "ERRO: secret FIREBASE_SERVICE_ACCOUNT_PROD nao esta definido"
+            exit 1
+          fi
+          echo "$FIREBASE_SERVICE_ACCOUNT_PROD" > serviceAccountProd.json
+          node -e "require('./serviceAccountProd.json'); console.log('service account JSON valido')"
+
+      - name: Rodar sync do Menudino
+        run: npm run sync:menudino
+
+      - name: Limpar service account
+        if: always()
+        run: rm -f serviceAccountProd.json

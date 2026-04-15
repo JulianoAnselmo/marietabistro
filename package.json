@@ -1,0 +1,13 @@
+{
+  "name": "marieta-site",
+  "version": "1.0.0",
+  "description": "Site do Marieta Bistrô — scripts de sincronização com o cardapio-admin",
+  "private": true,
+  "scripts": {
+    "sync:menudino": "node scripts/sync-menudino.js",
+    "cleanup:inactive": "node scripts/cleanup-inactive.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

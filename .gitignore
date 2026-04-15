@@ -1,3 +1,6 @@
 dist/
 .superpowers/
 .claude/
+node_modules/
+serviceAccountProd.json
+serviceAccountDev.json
