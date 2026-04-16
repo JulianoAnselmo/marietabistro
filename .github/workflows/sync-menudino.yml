@@ -1,0 +1,45 @@
+name: Sincronizar Cardapio Menudino
+
+on:
+  schedule:
+    # Roda a cada 5 minutos das 18h00 as 23h30 (horario de Brasilia, BRT = UTC-3).
+    # Em UTC isso vira das 21:00 ate 02:30 do dia seguinte:
+    - cron: '*/5 21-23 * * *'         # 21:00-23:55 UTC = 18:00-20:55 BRT
+    - cron: '*/5 0-1 * * *'           # 00:00-01:55 UTC = 21:00-22:55 BRT
+    - cron: '0,5,10,15,20,25,30 2 * * *'  # 02:00-02:30 UTC = 23:00-23:30 BRT
+  workflow_dispatch: # Permite rodar manualmente pelo GitHub
+
+# Garante que so 1 run acontece por vez (se um demorar, o proximo espera)
+concurrency:
+  group: sync-menudino
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Gravar serviceAccountProd.json a partir do secret
+        run: echo "$FIREBASE_SERVICE_ACCOUNT_PROD" > serviceAccountProd.json
+        env:
+          FIREBASE_SERVICE_ACCOUNT_PROD: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+
+      - name: Rodar sync do cardapio
+        run: npm run sync:menudino
+
+      - name: Remover credenciais do runner
+        if: always()
+        run: rm -f serviceAccountProd.json
