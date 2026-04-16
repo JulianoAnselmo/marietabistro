@@ -174,8 +174,32 @@ async function fetchAppAccessTokenViaBrowser() {
     });
 
     await page.goto(MENUDINO_HOME, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    // Dá um tempinho pro Cloudflare processar e pro JS hydratar
-    await new Promise(function(r) { setTimeout(r, 2000); });
+
+    // Espera ativa: Cloudflare challenge pode levar 5-10s pra passar.
+    // Loop detectando se ainda estamos na página de challenge.
+    var maxWaitMs = 20000;
+    var start = Date.now();
+    while (Date.now() - start < maxWaitMs) {
+      var title = await page.title().catch(function() { return ''; });
+      var url = page.url();
+      var isCloudflare = /Attention Required|Just a moment|cf-browser-verification/i.test(title) ||
+                         /__cf_chl_|challenges\.cloudflare\.com/.test(url);
+      if (!isCloudflare && tokenFromHeader) break;
+      if (!isCloudflare) {
+        // Passou do challenge mas ainda não pegou token — espera um pouco mais pro header chegar
+        await new Promise(function(r) { setTimeout(r, 1500); });
+        if (tokenFromHeader) break;
+      }
+      await new Promise(function(r) { setTimeout(r, 1000); });
+    }
+
+    // Se ainda não pegou token do header, tenta recarregar (challenge já passou, cookies gravados)
+    if (!tokenFromHeader) {
+      try {
+        await page.reload({ waitUntil: 'domcontentloaded', timeout: 20000 });
+        await new Promise(function(r) { setTimeout(r, 3000); });
+      } catch (e) {}
+    }
 
     var token = tokenFromHeader;
 
