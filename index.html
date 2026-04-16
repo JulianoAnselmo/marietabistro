@@ -3049,6 +3049,15 @@
       fetchFirestore('cardapio')
         .then(function(data) { if (data) iniciarCardapio(data); else iniciarCardapio(cardapioData); })
         .catch(function() { iniciarCardapio(cardapioData); });
+
+      fetchFirestore('instagram')
+        .then(function(data) {
+          if (Array.isArray(data) && data.length) {
+            instagramPosts = data;
+            renderInstagramGrid(data);
+          }
+        })
+        .catch(function() {});
     } else {
       iniciarCardapio(cardapioData);
     }
@@ -3374,19 +3383,22 @@
     })();
 
     // ---- Instagram Feed ----
-    (function() {
+    function renderInstagramGrid(posts) {
       var grid = document.getElementById('instagramGrid');
-      if (!grid || typeof instagramPosts === 'undefined' || !instagramPosts.length) return;
+      if (!grid || !posts || !posts.length) return;
       var igIcon = '<svg class="ig-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>';
       var html = '';
-      instagramPosts.forEach(function(post, i) {
+      posts.forEach(function(post) {
         html += '<a href="' + post.postUrl + '" target="_blank" rel="noopener" class="instagram-item" style="opacity:1;">';
         html += '<img src="' + post.image + '" alt="' + (post.alt || '').replace(/"/g, '&quot;') + '">';
         html += igIcon;
         html += '</a>';
       });
       grid.innerHTML = html;
-    })();
+    }
+    if (typeof instagramPosts !== 'undefined' && instagramPosts.length) {
+      renderInstagramGrid(instagramPosts);
+    }
 
     // ---- Lightbox ----
 
