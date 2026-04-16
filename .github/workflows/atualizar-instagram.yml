@@ -9,6 +9,8 @@ on:
 jobs:
   atualizar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout do repositorio
@@ -23,9 +25,23 @@ jobs:
         run: npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
 
       - name: Rodar script de atualizacao
-        run: node atualizar-instagram.js
+        id: run_script
+        continue-on-error: true
+        run: node atualizar-instagram.js 2>&1 | tee instagram-run.log
         env:
           PUPPETEER_ARGS: '--no-sandbox --disable-setuid-sandbox'
+
+      - name: Upload artifacts de debug
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-debug-${{ github.run_number }}
+          path: |
+            instagram-run.log
+            imagens/instagram/debug.png
+            imagens/instagram/debug.html
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Verificar se houve mudancas
         id: changes
@@ -37,6 +53,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Nao commitar arquivos de debug
+          git checkout -- imagens/instagram/debug.png imagens/instagram/debug.html 2>/dev/null || true
           git add imagens/instagram/
+          git diff --cached --quiet && { echo "Apenas debug files mudaram, pulando commit"; exit 0; }
           git commit -m "Atualizar feed Instagram $(date +'%Y-%m-%d')"
           git push
+
+      - name: Falhar job se o script saiu com erro
+        if: steps.run_script.outcome == 'failure'
+        run: |
+          echo "::error::Script atualizar-instagram.js falhou. Veja os artifacts (debug.png, debug.html, instagram-run.log)."
+          exit 1

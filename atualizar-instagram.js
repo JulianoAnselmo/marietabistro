@@ -117,15 +117,42 @@ async function downloadImage(browser, imgSrc, dest) {
       return results;
     }, MAX_POSTS);
 
+    // Diagnostico: sempre logar contexto da pagina
+    const pageTitle = await page.title();
+    const pageUrl = page.url();
+    const htmlLen = (await page.content()).length;
+    const domInfo = await page.evaluate(() => ({
+      hasArticle: !!document.querySelector('article'),
+      hasMain: !!document.querySelector('main'),
+      totalImgs: document.querySelectorAll('img').length,
+      bodyTextSample: (document.body ? document.body.innerText : '').slice(0, 200)
+    }));
+    console.log('--- DIAGNOSTICO ---');
+    console.log('URL final:   ' + pageUrl);
+    console.log('Titulo:      ' + pageTitle);
+    console.log('HTML bytes:  ' + htmlLen);
+    console.log('hasArticle:  ' + domInfo.hasArticle);
+    console.log('hasMain:     ' + domInfo.hasMain);
+    console.log('totalImgs:   ' + domInfo.totalImgs);
+    console.log('bodyText:    ' + domInfo.bodyTextSample.replace(/\s+/g, ' '));
+    console.log('-------------------');
     console.log('Encontrados ' + posts.length + ' posts.');
 
     if (posts.length === 0) {
-      // Salvar screenshot para debug
-      await page.screenshot({ path: path.join(OUTPUT_DIR, 'debug.png') });
-      console.log('Nenhum post encontrado. Screenshot salvo em imagens/instagram/debug.png');
-      console.log('Titulo da pagina: ' + await page.title());
+      if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+      }
+      // Salvar screenshot e HTML para debug
+      try {
+        await page.screenshot({ path: path.join(OUTPUT_DIR, 'debug.png'), fullPage: true });
+        fs.writeFileSync(path.join(OUTPUT_DIR, 'debug.html'), await page.content());
+        console.log('Debug salvo em imagens/instagram/debug.png e debug.html');
+      } catch (e) {
+        console.error('Falha ao salvar debug artifacts: ' + e.message);
+      }
       await browser.close();
-      return;
+      console.error('ERRO: Nenhum post foi extraido da pagina. Saindo com exit 1.');
+      process.exit(1);
     }
 
     console.log('Baixando imagens...');
@@ -192,12 +219,25 @@ async function downloadImage(browser, imgSrc, dest) {
     console.log('Sucesso! ' + postsData.length + ' imagens dos ultimos posts do @' + PROFILE);
 
   } catch (err) {
-    console.error('Erro:', err.message);
+    console.error('Erro: ' + err.message);
+    console.error(err.stack);
     try {
-      await page.screenshot({ path: path.join(OUTPUT_DIR, 'debug.png') });
-      console.log('Screenshot de debug salvo.');
-    } catch(e) {}
-  } finally {
+      if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+      }
+      const pages = await browser.pages();
+      const p = pages[0];
+      if (p) {
+        await p.screenshot({ path: path.join(OUTPUT_DIR, 'debug.png'), fullPage: true });
+        fs.writeFileSync(path.join(OUTPUT_DIR, 'debug.html'), await p.content());
+        console.log('Screenshot e HTML de debug salvos.');
+      }
+    } catch(e) {
+      console.error('Falha ao salvar debug: ' + e.message);
+    }
     await browser.close();
+    process.exit(1);
+  } finally {
+    try { await browser.close(); } catch(e) {}
   }
 })();
