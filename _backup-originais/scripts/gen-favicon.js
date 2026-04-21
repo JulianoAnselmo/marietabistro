@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const ROOT = path.resolve(__dirname, '..');
-const LOGO = path.join(ROOT, 'imagens', 'logo-marieta.webp');
+const LOGO = path.join(ROOT, 'imagens', 'logo-marieta.png');
 const BG = { r: 3, g: 36, b: 57, alpha: 1 }; // #032439
 
 async function makeFavicon(size, outPath) {
@@ -32,11 +32,11 @@ async function makeFavicon(size, outPath) {
 }
 
 (async () => {
-  await makeFavicon(48, path.join(ROOT, 'favicon-48.webp'));
-  await makeFavicon(96, path.join(ROOT, 'favicon-96.webp'));
-  await makeFavicon(192, path.join(ROOT, 'favicon-192.webp'));
-  await makeFavicon(512, path.join(ROOT, 'favicon-512.webp'));
-  await makeFavicon(180, path.join(ROOT, 'apple-touch-icon.webp'));
+  await makeFavicon(48, path.join(ROOT, 'favicon-48.png'));
+  await makeFavicon(96, path.join(ROOT, 'favicon-96.png'));
+  await makeFavicon(192, path.join(ROOT, 'favicon-192.png'));
+  await makeFavicon(512, path.join(ROOT, 'favicon-512.png'));
+  await makeFavicon(180, path.join(ROOT, 'apple-touch-icon.png'));
 })().catch((err) => {
   console.error(err);
   process.exit(1);

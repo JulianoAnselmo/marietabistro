@@ -113,7 +113,7 @@ Replace the entire hero section (from `<!-- ===== HERO ===== -->` to closing `</
   <!-- ===== HERO ===== -->
   <section class="hero grain" id="hero">
     <div class="hero-bg">
-      <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.webp" alt="Interior do Marieta Bistrô com iluminação quente e paredes de tijolos expostos" loading="eager" id="heroImg">
+      <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Interior do Marieta Bistrô com iluminação quente e paredes de tijolos expostos" loading="eager" id="heroImg">
     </div>
     <div class="hero-content">
       <div class="hero-location">
@@ -305,7 +305,7 @@ Replace the entire about section (from `<!-- ===== SOBRE ===== -->` line 2018 th
           <h3 class="timeline-title">A Vovó Marieta</h3>
           <p class="timeline-text">Dona Marieta, mulher italiana que transformava a cozinha em um lugar mágico, reunia a família ao redor da mesa com receitas que viraram tradição. O amor pela culinária passou de geração em geração.</p>
           <div class="timeline-image">
-            <img src="imagens/historia-vo-marieta.webp" alt="Vovó Marieta — a inspiração por trás do restaurante" loading="lazy">
+            <img src="imagens/historia-vo-marieta.jpg" alt="Vovó Marieta — a inspiração por trás do restaurante" loading="lazy">
           </div>
         </div>
         <div class="timeline-chapter reveal">
@@ -314,7 +314,7 @@ Replace the entire about section (from `<!-- ===== SOBRE ===== -->` line 2018 th
           <h3 class="timeline-title">Um centenário repaginado</h3>
           <p class="timeline-text">A casa do século XX — presente dado a Mayara, esposa do Chef, por seu avô Ibrahim Cheade — foi cuidadosamente restaurada, preservando a arquitetura original e trazendo conforto contemporâneo ao centro de Taquaritinga.</p>
           <div class="timeline-image">
-            <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.webp" alt="Fachada do casarão centenário do Marieta Bistrô" loading="lazy">
+            <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png" alt="Fachada do casarão centenário do Marieta Bistrô" loading="lazy">
           </div>
         </div>
         <div class="timeline-chapter current reveal">
@@ -323,7 +323,7 @@ Replace the entire about section (from `<!-- ===== SOBRE ===== -->` line 2018 th
           <h3 class="timeline-title">Chef Ricardo Vagner</h3>
           <p class="timeline-text">Neto primogênito da Vovó Marieta, o Chef Ricardo Vagner guardou consigo memórias que hoje moldam sua paixão pela culinária. Com técnica contemporânea e respeito pela tradição, transforma ingredientes regionais em pratos de conceito único.</p>
           <div class="timeline-image">
-            <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.webp" alt="Chef Ricardo Vagner na cozinha do Marieta Bistrô" loading="lazy">
+            <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Chef Ricardo Vagner na cozinha do Marieta Bistrô" loading="lazy">
           </div>
         </div>
       </div>
@@ -654,35 +654,35 @@ Replace the gallery section HTML (from `<!-- ===== GALERIA ===== -->` through it
       </div>
       <div class="gallery-grid">
         <div class="gallery-item reveal" onclick="openLightbox(this)">
-          <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.webp" alt="Salão principal do Marieta Bistrô" loading="lazy">
+          <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="Salão principal do Marieta Bistrô" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">O Ambiente</div>
             <div class="gallery-caption-title">Salão principal</div>
           </div>
         </div>
         <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(this)">
-          <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.webp" alt="Chef Ricardo Vagner" loading="lazy">
+          <img src="imagens/afb4c45e-2913-4679-ae88-536df3d4e395.png" alt="Chef Ricardo Vagner" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">O Chef</div>
             <div class="gallery-caption-title">Ricardo Vagner</div>
           </div>
         </div>
         <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(this)">
-          <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.webp" alt="Fachada do Marieta Bistrô à noite" loading="lazy">
+          <img src="imagens/5e8f8d97-0c9d-4aa6-8140-c91f6b1ab8f5.png" alt="Fachada do Marieta Bistrô à noite" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">A Fachada</div>
             <div class="gallery-caption-title">Centenário iluminado</div>
           </div>
         </div>
         <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(this)">
-          <img src="imagens/historia-familia.webp" alt="História da família por trás do Marieta Bistrô" loading="lazy">
+          <img src="imagens/historia-familia.jpg" alt="História da família por trás do Marieta Bistrô" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">A Família</div>
             <div class="gallery-caption-title">Raízes e tradição</div>
           </div>
         </div>
         <div class="gallery-item reveal reveal-delay-4" onclick="openLightbox(this)">
-          <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.webp" alt="Bar e atmosfera do Marieta Bistrô" loading="lazy">
+          <img src="imagens/d9800dee-fbec-4402-afb8-f9d980ac2381.png" alt="Bar e atmosfera do Marieta Bistrô" loading="lazy">
           <div class="gallery-caption">
             <div class="gallery-caption-label">A Cozinha</div>
             <div class="gallery-caption-title">Nos bastidores</div>
@@ -1273,14 +1273,14 @@ For each `<img>` tag in the HTML, wrap with `<picture>` for WebP support. Exampl
 
 Replace:
 ```html
-<img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.webp" alt="..." loading="eager" id="heroImg">
+<img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="..." loading="eager" id="heroImg">
 ```
 
 With:
 ```html
 <picture>
   <source srcset="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.webp" type="image/webp">
-  <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.webp" alt="..." loading="eager" id="heroImg">
+  <img src="imagens/3fb6fdc9-4dee-400c-9052-e4e66d23acc7.png" alt="..." loading="eager" id="heroImg">
 </picture>
 ```
 
@@ -1289,7 +1289,7 @@ Apply the same pattern to ALL `<img>` tags in the gallery, about timeline, exper
 - [ ] **Step 5: Verify WebP files are smaller**
 
 ```bash
-ls -la imagens/*.webp imagens/*.webp imagens/*.webp
+ls -la imagens/*.webp imagens/*.png imagens/*.jpg
 ```
 
 Expected: WebP files should be 60-70% smaller than originals.
