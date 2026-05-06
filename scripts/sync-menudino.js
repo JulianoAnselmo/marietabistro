@@ -634,6 +634,7 @@ function mergeCardapio(atual, novo) {
     var catMatch = catsAtuaisPorTitulo[catKey];
     var targetCat;
 
+    var isNewCat = !catMatch;
     if (!catMatch) {
       // Categoria nova → roteia por heurística (bebida → aba Bebidas; senão primeira aba)
       stats.categorias_novas++;
@@ -656,8 +657,9 @@ function mergeCardapio(atual, novo) {
       vistosNoMenudino[itemKey] = true;
 
       var atualInfo = itensAtuaisPorNome[itemKey];
-      if (!atualInfo) {
-        // Item novo → adiciona na categoria correspondente
+      // Categoria nova: sempre adiciona os itens a ela, mesmo que já existam em outra categoria.
+      // Evita categorias criadas vazias quando os itens têm o mesmo nome na categoria antiga.
+      if (!atualInfo || isNewCat) {
         targetCat.itens.push(itemNovo);
         stats.adicionados++;
         return;
