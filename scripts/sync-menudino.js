@@ -695,7 +695,10 @@ function mergeCardapio(atual, novo) {
       // nome: atualiza (cosmético)
       itemAtual.nome = itemNovo.nome;
 
-      // ativo e tags: preserva (não mexe)
+      // Menudino é autoridade de disponibilidade: se o item veio na sync, força ativo:true.
+      itemAtual.ativo = true;
+
+      // tags: preserva (não mexe)
 
       stats.atualizados++;
     });
