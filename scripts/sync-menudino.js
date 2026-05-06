@@ -649,9 +649,14 @@ function mergeCardapio(atual, novo) {
     } else {
       targetCat = resultado[catMatch.tabIdx].categorias[catMatch.catIdx];
     }
-    // Categoria nova OU categoria já existente mas vazia: trata como nova (Menudino é autoridade
-    // sobre quais itens pertencem a ela). Cobre estado broken onde sync anterior criou cat vazia.
-    var isNewCat = !catMatch || (targetCat.itens || []).length === 0;
+    // Categoria nova OU sem nenhum item ativo: trata como nova (Menudino é autoridade
+    // sobre quais itens pertencem a ela). Cobre estado broken onde sync anterior criou cat
+    // vazia ou com items soft-deletados (ativo:false).
+    var itensAtivos = (targetCat.itens || []).filter(function(i) { return i && i.ativo !== false; });
+    var isNewCat = !catMatch || itensAtivos.length === 0;
+    if (isNewCat && catMatch) {
+      targetCat.itens = [];
+    }
 
     // Merge de cada item
     catNova.itens.forEach(function(itemNovo) {
@@ -700,7 +705,9 @@ function mergeCardapio(atual, novo) {
   Object.keys(itensAtuaisPorNome).forEach(function(key) {
     if (vistosNoMenudino[key]) return;
     var info = itensAtuaisPorNome[key];
-    var itemRef = resultado[info.tabIdx].categorias[info.catIdx].itens[info.itemIdx];
+    var arr = (resultado[info.tabIdx] && resultado[info.tabIdx].categorias[info.catIdx] && resultado[info.tabIdx].categorias[info.catIdx].itens) || [];
+    var itemRef = arr[info.itemIdx];
+    if (!itemRef) return; // pode ter sido removido pelo reset de cat broken
     if (itemRef.ativo !== false) {
       itemRef.ativo = false;
       stats.inativados++;
