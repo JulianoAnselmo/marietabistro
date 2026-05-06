@@ -634,7 +634,6 @@ function mergeCardapio(atual, novo) {
     var catMatch = catsAtuaisPorTitulo[catKey];
     var targetCat;
 
-    var isNewCat = !catMatch;
     if (!catMatch) {
       // Categoria nova → roteia por heurística (bebida → aba Bebidas; senão primeira aba)
       stats.categorias_novas++;
@@ -650,6 +649,9 @@ function mergeCardapio(atual, novo) {
     } else {
       targetCat = resultado[catMatch.tabIdx].categorias[catMatch.catIdx];
     }
+    // Categoria nova OU categoria já existente mas vazia: trata como nova (Menudino é autoridade
+    // sobre quais itens pertencem a ela). Cobre estado broken onde sync anterior criou cat vazia.
+    var isNewCat = !catMatch || (targetCat.itens || []).length === 0;
 
     // Merge de cada item
     catNova.itens.forEach(function(itemNovo) {
