@@ -564,8 +564,11 @@
       flex-direction: column;
       gap: 6px;
       background: none;
+      border: none;
       padding: 8px;
       cursor: pointer;
+      position: relative;
+      z-index: 1002;
     }
     .mobile-toggle span {
       display: block;
@@ -617,9 +620,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(3, 36, 57, 0.55) 0%, rgba(3, 36, 57, 0.75) 100%),
-        radial-gradient(ellipse at 70% 40%, rgba(3, 36, 57, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(246, 241, 223, 0.06) 0%, transparent 40%);
+        linear-gradient(180deg, rgba(48, 37, 30, 0.35) 0%, rgba(20, 14, 10, 0.55) 100%),
+        radial-gradient(ellipse at 70% 40%, rgba(48, 37, 30, 0.20) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(246, 241, 223, 0.05) 0%, transparent 40%);
       pointer-events: none;
     }
 
@@ -2252,10 +2255,11 @@
         inset: 0;
         background: rgba(48, 37, 30, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         justify-content: center;
         align-items: center;
         gap: 32px;
-        z-index: 999;
+        z-index: 1001;
       }
       .header-nav.mobile-open a {
         font-size: 1.1rem;
